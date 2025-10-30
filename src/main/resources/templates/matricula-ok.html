@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Matrícula enviada</title>
+</head>
+<body>
+  <div th:replace="~{layout :: content(~{::#page})}"></div>  
+  <div class="success-card">
+    <h2>¡Matrícula enviada correctamente!</h2>
+    <p>Tu número de matrícula es <strong th:text="${numero}">1</strong>.</p>
+    <a th:href="@{/matriculas/form}" class="btn-secondary">Enviar otra</a>
+  </div>
+</body>
+</html>

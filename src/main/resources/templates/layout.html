@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${title} ?: 'Matrículas 2026'">Matrículas 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link th:href="@{/css/site.css}" rel="stylesheet">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand">
+      <span class="brand-mark">A</span>
+      <span class="brand-text">Escuela Arturo Alessandri Palma</span>
+    </div>
+    <nav class="top-nav">
+      <a th:href="@{/matriculas/form}">Formulario</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Fragmento con PARÁMETRO -->
+<main class="container" th:fragment="content(pageContent)">
+  <div th:insert="${pageContent}"></div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <small>&copy; 2025 · Matrículas 2026</small>
+  </div>
+</footer>
+</body>
+</html>

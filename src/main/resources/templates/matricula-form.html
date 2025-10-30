@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario de Matrícula</title>
+  <link th:href="@{/css/site.css}" rel="stylesheet">
+</head>
+<body>
+
+<!-- AQUÍ reemplazamos con el fragmento y le PASAMOS el bloque #page -->
+<div th:replace="~{layout :: content(~{::#page})}">
+  <!-- Este bloque #page es el PARÁMETRO que se envía al layout -->
+  <section id="page">
+
+    <section class="page-head">
+      <h1>Formulario de Matrícula 2026</h1>
+      <p class="lead">Completa los datos en cada sección. Los campos con * son obligatorios.</p>
+      <div th:if="${msgError}" class="alert alert-danger" th:text="${msgError}"></div>
+    </section>
+
+    <form th:action="@{/matriculas/form}" th:object="${matricula}" method="post" class="form-card">
+      
+  <!-- =================== ALUMNO =================== -->
+  <div class="card">
+    <div class="card-head">
+      <h2>Datos del Alumno</h2>
+    </div>
+    <div class="card-body grid-2">
+      <div class="field">
+        <label>RUT *</label>
+        <input type="text" th:field="*{rutAlumno}" required>
+      </div>
+      <div class="field">
+        <label>Nombres *</label>
+        <input type="text" th:field="*{nombresAlumno}" required>
+      </div>
+      <div class="field">
+        <label>Apellido Paterno *</label>
+        <input type="text" th:field="*{apellidoPaternoAlumno}" required>
+      </div>
+      <div class="field">
+        <label>Apellido Materno *</label>
+        <input type="text" th:field="*{apellidoMaternoAlumno}" required>
+      </div>
+      <div class="field">
+        <label>Curso *</label>
+        <input type="text" th:field="*{cursoAlumno}" placeholder="p.ej. 3° Básico A" required>
+      </div>
+      <div class="field">
+        <label>Fecha Nacimiento *</label>
+        <input type="date" th:field="*{fechaNacimientoAlumno}" required>
+      </div>
+      <div class="field">
+        <label>Nacionalidad *</label>
+        <input type="text" th:field="*{nacionalidadAlumno}" required>
+      </div>
+      <div class="field">
+        <label>Edad</label>
+        <input type="number" th:field="*{edadAlumno}" min="0">
+      </div>
+      <div class="field">
+        <label>Dirección *</label>
+        <input type="text" th:field="*{direccionAlumno}" required>
+      </div>
+      <div class="field">
+        <label>Comuna *</label>
+        <input type="text" th:field="*{comunaAlumno}" required>
+      </div>
+      <div class="field">
+        <label>Vive con</label>
+        <input type="text" th:field="*{viveConAlumno}">
+      </div>
+      <div class="field">
+        <label>CESFAM</label>
+        <input type="text" th:field="*{cesfamAlumno}">
+      </div>
+      <div class="field full">
+        <label>Salud mental / Observaciones</label>
+        <input type="text" th:field="*{saludMentalAlumno}">
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== APODERADO TITULAR =================== -->
+  <div class="card">
+    <div class="card-head">
+      <h2>Apoderado Titular</h2>
+    </div>
+    <div class="card-body grid-2" id="titular-section">
+      <div class="field">
+        <label>RUT *</label>
+        <input type="text" th:field="*{rutApoderadoTitular}" id="tit_rut" required>
+      </div>
+      <div class="field">
+        <label>Nombres *</label>
+        <input type="text" th:field="*{nombresApoderadoTitular}" id="tit_nombres" required>
+      </div>
+      <div class="field">
+        <label>Apellido Paterno *</label>
+        <input type="text" th:field="*{apellidoPaternoApoderadoTitular}" id="tit_apPat" required>
+      </div>
+      <div class="field">
+        <label>Apellido Materno *</label>
+        <input type="text" th:field="*{apellidoMaternoApoderadoTitular}" id="tit_apMat" required>
+      </div>
+      <div class="field">
+        <label>Parentesco *</label>
+        <input type="text" th:field="*{parentescoApoderadoTitular}" id="tit_parentesco" required>
+      </div>
+      <div class="field">
+        <label>Correo *</label>
+        <input type="email" th:field="*{correoApoderadoTitular}" id="tit_correo" required>
+      </div>
+      <div class="field">
+        <label>Teléfono 1</label>
+        <input type="text" th:field="*{telefono1ApoderadoTitular}" id="tit_tel1">
+      </div>
+      <div class="field">
+        <label>Teléfono 2</label>
+        <input type="text" th:field="*{telefono2ApoderadoTitular}" id="tit_tel2">
+      </div>
+      <div class="field">
+        <label>Dirección</label>
+        <input type="text" th:field="*{direccionApoderadoTitular}" id="tit_dir">
+      </div>
+      <div class="field">
+        <label>Comuna</label>
+        <input type="text" th:field="*{comunaApoderadoTitular}" id="tit_comuna">
+      </div>
+      <div class="field">
+        <label>Nacionalidad</label>
+        <input type="text" th:field="*{nacionalidadApoderadoTitular}" id="tit_nac">
+      </div>
+      <div class="field">
+        <label>Fecha Nacimiento</label>
+        <input type="date" th:field="*{fechaNacimientoApoderadoTitular}" id="tit_fnac">
+      </div>
+
+      <div class="field full checks-inline">
+        <label class="check">
+          <input type="checkbox" id="tit_es_padre"> Es Padre
+        </label>
+        <label class="check">
+          <input type="checkbox" id="tit_es_madre"> Es Madre
+        </label>
+        <small>Si marcas, se copiarán estos datos a la sección correspondiente.</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== APODERADO SUPLENTE =================== -->
+  <div class="card">
+    <div class="card-head">
+      <h2>Apoderado Suplente (opcional)</h2>
+    </div>
+    <div class="card-body grid-2" id="suplente-section">
+      <div class="field">
+        <label>RUT</label>
+        <input type="text" th:field="*{rutApoderadoSuplente}" id="sup_rut">
+      </div>
+      <div class="field">
+        <label>Nombres</label>
+        <input type="text" th:field="*{nombresApoderadoSuplente}" id="sup_nombres">
+      </div>
+      <div class="field">
+        <label>Apellido Paterno</label>
+        <input type="text" th:field="*{apellidoPaternoApoderadoSuplente}" id="sup_apPat">
+      </div>
+      <div class="field">
+        <label>Apellido Materno</label>
+        <input type="text" th:field="*{apellidoMaternoApoderadoSuplente}" id="sup_apMat">
+      </div>
+      <div class="field">
+        <label>Parentesco</label>
+        <input type="text" th:field="*{parentescoApoderadoSuplente}" id="sup_parentesco">
+      </div>
+      <div class="field">
+        <label>Teléfono 1</label>
+        <input type="text" th:field="*{telefono1ApoderadoSuplente}" id="sup_tel1">
+      </div>
+      <div class="field">
+        <label>Teléfono 2</label>
+        <input type="text" th:field="*{telefono2ApoderadoSuplente}" id="sup_tel2">
+      </div>
+      <div class="field">
+        <label>Dirección</label>
+        <input type="text" th:field="*{direccionApoderadoSuplente}" id="sup_dir">
+      </div>
+      <div class="field">
+        <label>Comuna</label>
+        <input type="text" th:field="*{comunaApoderadoSuplente}" id="sup_comuna">
+      </div>
+      <div class="field">
+        <label>Nacionalidad</label>
+        <input type="text" th:field="*{nacionalidadApoderadoSuplente}" id="sup_nac">
+      </div>
+      <div class="field">
+        <label>Fecha Nacimiento</label>
+        <input type="date" th:field="*{fechaNacimientoApoderadoSuplente}" id="sup_fnac">
+      </div>
+
+      <div class="field full checks-inline">
+        <label class="check">
+          <input type="checkbox" id="sup_es_padre"> Es Padre
+        </label>
+        <label class="check">
+          <input type="checkbox" id="sup_es_madre"> Es Madre
+        </label>
+        <small>Si marcas, se copiarán estos datos a la sección correspondiente.</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== MADRE =================== -->
+  <div class="card">
+    <div class="card-head">
+      <h2>Datos de la Madre (opcional)</h2>
+    </div>
+    <div class="card-body grid-2" id="madre-section">
+      <div class="field"><label>RUT</label><input type="text" th:field="*{rutMadre}" id="mad_rut"></div>
+      <div class="field"><label>Nombres</label><input type="text" th:field="*{nombresMadre}" id="mad_nombres"></div>
+      <div class="field"><label>Apellido Paterno</label><input type="text" th:field="*{apellidoPaternoMadre}" id="mad_apPat"></div>
+      <div class="field"><label>Apellido Materno</label><input type="text" th:field="*{apellidoMaternoMadre}" id="mad_apMat"></div>
+      <div class="field"><label>Nacionalidad</label><input type="text" th:field="*{nacionalidadMadre}" id="mad_nac"></div>
+      <div class="field"><label>Fecha Nacimiento</label><input type="date" th:field="*{fechaNacimientoMadre}" id="mad_fnac"></div>
+      <div class="field"><label>Dirección</label><input type="text" th:field="*{direccionMadre}" id="mad_dir"></div>
+      <div class="field"><label>Comuna</label><input type="text" th:field="*{comunaMadre}" id="mad_comuna"></div>
+      <div class="field"><label>Teléfono 1</label><input type="text" th:field="*{telefono1Madre}" id="mad_tel1"></div>
+      <div class="field"><label>Teléfono 2</label><input type="text" th:field="*{telefono2Madre}" id="mad_tel2"></div>
+      <div class="field"><label>Correo</label><input type="email" th:field="*{correoMadre}" id="mad_correo"></div>
+      <div class="field"><label>Nivel Educación</label><input type="text" th:field="*{nivelEducacionMadre}" id="mad_nivel"></div>
+      <div class="field"><label>Ocupación</label><input type="text" th:field="*{ocupacionMadre}" id="mad_ocup"></div>
+    </div>
+  </div>
+
+  <!-- =================== PADRE =================== -->
+  <div class="card">
+    <div class="card-head">
+      <h2>Datos del Padre (opcional)</h2>
+    </div>
+    <div class="card-body grid-2" id="padre-section">
+      <div class="field"><label>RUT</label><input type="text" th:field="*{rutPadre}" id="pad_rut"></div>
+      <div class="field"><label>Nombres</label><input type="text" th:field="*{nombresPadre}" id="pad_nombres"></div>
+      <div class="field"><label>Apellido Paterno</label><input type="text" th:field="*{apellidoPaternoPadre}" id="pad_apPat"></div>
+      <div class="field"><label>Apellido Materno</label><input type="text" th:field="*{apellidoMaternoPadre}" id="pad_apMat"></div>
+      <div class="field"><label>Nacionalidad</label><input type="text" th:field="*{nacionalidadPadre}" id="pad_nac"></div>
+      <div class="field"><label>Fecha Nacimiento</label><input type="date" th:field="*{fechaNacimientoPadre}" id="pad_fnac"></div>
+      <div class="field"><label>Dirección</label><input type="text" th:field="*{direccionPadre}" id="pad_dir"></div>
+      <div class="field"><label>Comuna</label><input type="text" th:field="*{comunaPadre}" id="pad_comuna"></div>
+      <div class="field"><label>Teléfono 1</label><input type="text" th:field="*{telefono1Padre}" id="pad_tel1"></div>
+      <div class="field"><label>Teléfono 2</label><input type="text" th:field="*{telefono2Padre}" id="pad_tel2"></div>
+      <div class="field"><label>Correo</label><input type="email" th:field="*{correoPadre}" id="pad_correo"></div>
+      <div class="field"><label>Nivel Educación</label><input type="text" th:field="*{nivelEducacionPadre}" id="pad_nivel"></div>
+      <div class="field"><label>Ocupación</label><input type="text" th:field="*{ocupacionPadre}" id="pad_ocup"></div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="submit" class="btn-primary">Enviar Matrícula</button>
+  </div>
+</form>
+  </section>
+</div>
+
+</body>
+<script>
+// ====== utilidades de mapeo ======
+function makePairs(fromPrefix, toPrefix) {
+  const base = [
+    ['_rut','_rut'],
+    ['_nombres','_nombres'],
+    ['_apPat','_apPat'],
+    ['_apMat','_apMat'],
+    ['_nac','_nac'],
+    ['_fnac','_fnac'],
+    ['_dir','_dir'],
+    ['_comuna','_comuna'],
+    ['_tel1','_tel1'],
+    ['_tel2','_tel2']
+  ];
+  // correo existe en padre/madre y en titular (en suplente puede faltar según tu HTML)
+  base.push(['_correo','_correo']);
+
+  // nivel y ocupación solo existen en padre/madre; no se copian desde titular/suplente
+  return base.map(([a,b]) => [`${fromPrefix}${a}`, `${toPrefix}${b}`]);
+}
+
+function getEl(id){ return document.getElementById(id); }
+function copyValue(fromId, toId, override=false) {
+  const from = getEl(fromId), to = getEl(toId);
+  if (!from || !to) return;
+  if (override || !to.value) {
+    to.value = from.value;
+    to.dispatchEvent(new Event('input', {bubbles:true}));
+    to.dispatchEvent(new Event('change', {bubbles:true}));
+  }
+}
+
+// ====== gestor de sincronización (añadir/quitar listeners) ======
+const syncRegistry = new Map(); // key=checkboxId, value=array de {fromId, toId, handler}
+
+function startSync(checkboxId, pairs) {
+  // copia inicial
+  pairs.forEach(([fromId, toId]) => copyValue(fromId, toId, true));
+
+  // listeners en vivo
+  const entries = [];
+  pairs.forEach(([fromId, toId]) => {
+    const from = getEl(fromId);
+    if (!from) return;
+    const handler = () => copyValue(fromId, toId, true);
+    from.addEventListener('input', handler);
+    from.addEventListener('change', handler);
+    entries.push({fromId, toId, handler});
+  });
+  syncRegistry.set(checkboxId, entries);
+}
+
+function stopSync(checkboxId) {
+  const entries = syncRegistry.get(checkboxId) || [];
+  entries.forEach(({fromId, handler}) => {
+    const from = getEl(fromId);
+    if (from) {
+      from.removeEventListener('input', handler);
+      from.removeEventListener('change', handler);
+    }
+  });
+  syncRegistry.delete(checkboxId);
+}
+
+// ====== setup por bloque (Titular/Suplente -> Padre/Madre) ======
+function setupBlock(options) {
+  const {
+    fromPrefix,                 // 'tit' o 'sup'
+    padreCheckboxId,            // ej. 'tit_es_padre'
+    madreCheckboxId,            // ej. 'tit_es_madre'
+    toPadrePrefix='pad',        // destino padre
+    toMadrePrefix='mad'         // destino madre
+  } = options;
+
+  const chkPadre = getEl(padreCheckboxId);
+  const chkMadre = getEl(madreCheckboxId);
+
+  function onPadreChange() {
+    if (!chkPadre) return;
+    if (chkPadre.checked) {
+      // exclusión mutua
+      if (chkMadre) { chkMadre.checked = false; stopSync(madreCheckboxId); }
+      startSync(padreCheckboxId, makePairs(fromPrefix, toPadrePrefix));
+    } else {
+      stopSync(padreCheckboxId);
+    }
+  }
+
+  function onMadreChange() {
+    if (!chkMadre) return;
+    if (chkMadre.checked) {
+      if (chkPadre) { chkPadre.checked = false; stopSync(padreCheckboxId); }
+      startSync(madreCheckboxId, makePairs(fromPrefix, toMadrePrefix));
+    } else {
+      stopSync(madreCheckboxId);
+    }
+  }
+
+  if (chkPadre) chkPadre.addEventListener('change', onPadreChange);
+  if (chkMadre) chkMadre.addEventListener('change', onMadreChange);
+
+  // si al cargar ya vienen marcados (re-hidratación)
+  if (chkPadre && chkPadre.checked) onPadreChange();
+  if (chkMadre && chkMadre.checked) onMadreChange();
+}
+
+// ====== inicialización ======
+document.addEventListener('DOMContentLoaded', () => {
+  // TITULAR -> PADRE/MADRE
+  setupBlock({
+    fromPrefix: 'tit',
+    padreCheckboxId: 'tit_es_padre',
+    madreCheckboxId: 'tit_es_madre'
+  });
+
+  // SUPLENTE -> PADRE/MADRE
+  setupBlock({
+    fromPrefix: 'sup',
+    padreCheckboxId: 'sup_es_padre',
+    madreCheckboxId: 'sup_es_madre'
+  });
+});
+</script>
+
+</html>
