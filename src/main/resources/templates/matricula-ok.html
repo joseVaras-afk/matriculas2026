@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
+  <style>
+    body{font-family: Arial, sans-serif; color:#1f2430}
+    .wrap{max-width:620px;margin:0 auto;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden}
+    .head{background:#f6d6e5;padding:16px 20px}
+    .head h1{margin:0;color:#1e2a44;font-size:20px}
+    .body{padding:20px}
+    .box{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:14px}
+    .row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #e5e7eb}
+    .row:last-child{border-bottom:0}
+    .label{color:#6b7280}
+    .val{font-weight:600}
+    .foot{padding:16px 20px;background:#f7f8fb;color:#6b7280;font-size:12px}
+  </style>
   <meta charset="UTF-8">
   <title>Matrícula enviada</title>
 </head>
@@ -9,10 +22,38 @@
 <div th:replace="~{layout :: content(~{::#page})}">
   <!-- Este bloque #page es el PARÁMETRO que se envía al layout -->
   <section id="page">
-  <div class="success-card">
-    <h2>¡Matrícula enviada correctamente!</h2>
-    <p>Tu número de matrícula es <strong th:text="${numero}">1</strong>.</p>
-    <a th:href="@{/matriculas/form}" class="btn-secondary">Enviar otra</a>
+  <div class="wrap">
+    <div class="head">
+      <h1>Comprobante de Matrícula</h1>
+    </div>
+    <div class="body">
+      <p>Estimado(a) <span th:text="${apoderadoNombre}">Apoderado</span>,</p>
+      <p>Hemos recibido exitosamente el formulario de matrícula.</p>
+
+      <div class="box">
+        <div class="row">
+          <div class="label">N° Matrícula</div>
+          <div class="val" th:text=" ${numeroMatricula}">12345</div>
+        </div>
+        <div class="row">
+          <div class="label">Alumno(a)</div>
+          <div class="val" th:text=" ${alumnoNombre}">Nombre del Alumno</div>
+        </div>
+        <div class="row">
+          <div class="label">Apoderado(a) Titular</div>
+          <div class="val" th:text=" ${apoderadoNombre}">Nombre Apoderado</div>
+        </div>
+        <div class="row">
+          <div class="label">Fecha</div>
+          <div class="val" th:text=" ${#temporals.format(fecha, 'dd-MM-yyyy')}" >2025-10-30</div>
+        </div>
+      </div>
+
+      <p style="margin-top:14px">Se ha enviado una copia de este comprobante a su correo</p>
+    </div>
+    <div class="foot">
+      Este es un mensaje automático del sistema de Matrículas 2026.
+    </div>
   </div>
   </section>
 </div>

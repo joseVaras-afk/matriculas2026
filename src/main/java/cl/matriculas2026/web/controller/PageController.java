@@ -1,6 +1,10 @@
 package cl.matriculas2026.web.controller;
 
+import cl.matriculas2026.entity.Alumno;
+import cl.matriculas2026.entity.ApoderadoTitular;
+import cl.matriculas2026.entity.Matricula;
 import cl.matriculas2026.service.MatriculaService;
+import cl.matriculas2026.service.impl.EmailServiceImpl;
 import cl.matriculas2026.web.dto.MatriculaRequest;
 import jakarta.validation.Valid;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,10 +20,13 @@ import java.time.LocalDate;
 @RequestMapping("/matriculas")
 public class PageController {
 
+    private final EmailServiceImpl emailServiceImpl;
+
     private final MatriculaService matriculaService;
 
-    public PageController(MatriculaService matriculaService) {
+    public PageController(MatriculaService matriculaService, EmailServiceImpl emailServiceImpl) {
         this.matriculaService = matriculaService;
+        this.emailServiceImpl = emailServiceImpl;
     }
 
     // Para parsear fechas tipo yyyy-MM-dd desde <input type="date">
@@ -46,6 +53,7 @@ public class PageController {
         }
         try {
             var creada = matriculaService.crearMatricula(matricula);
+            emailServiceImpl.enviarComprobanteMatricula(creada);
             model.addAttribute("numero", creada.getNumeroMatricula());
             return "redirect:/matriculas/ok?num=" + creada.getNumeroMatricula();
         } catch (Exception ex) {
@@ -55,8 +63,23 @@ public class PageController {
     }
 
     @GetMapping("/ok")
-    public String ok(@RequestParam("num") Integer num, Model model) {
-        model.addAttribute("numero", num);
+    public String ok(@ModelAttribute("matricula") MatriculaRequest matricula,
+                     @RequestParam("num") int num,
+                      Model model) {
+        Matricula m = matriculaService.obtenerPorNumero(num);
+        model.addAttribute("numeroMatricula", num);
+        Alumno alumno = m.getAlumno();
+        String nombreCompletoAlumno = alumno.getNombres()+" "+
+                alumno.getApellidoPaterno()+" "+
+                alumno.getApellidoMaterno();
+        model.addAttribute("alumnoNombre", nombreCompletoAlumno);
+        ApoderadoTitular apoderado = m.getApoderadoTitular();
+        String nombreCompletoApoderado = apoderado.getNombres()+" "+
+                apoderado.getApellidoPaterno()+" "+
+                apoderado.getApellidoMaterno();
+        model.addAttribute("apoderadoNombre", nombreCompletoApoderado);
+        
+        model.addAttribute("fecha", m.getFechaMatricula());
         return "matricula-ok";
     }
        @GetMapping("")
