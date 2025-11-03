@@ -47,4 +47,7 @@ public class ApoderadoSuplente {
 
     @Column(name = "telefono2_apoderadoSuplente")
     private String telefono2;
+
+    @Column(name = "correo_apoderadoSuplente")
+    private String correoApoderadoSuplente;
 }

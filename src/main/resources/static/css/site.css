@@ -89,3 +89,52 @@ html,body{ margin:0; padding:0; font-family: Inter, system-ui, -apple-system, Se
   background: var(--card); border:1px solid var(--border); border-radius:var(--radius);
   box-shadow: var(--shadow); padding:24px; margin:24px 0;
 }
+/* ===== utilidades de layout para inputs con prefijo (ej: +569) ===== */
+.input-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.input-row .prefix{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 10px;
+  height:40px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#fff;
+  color:var(--navy);
+  font-weight:600;
+  white-space:nowrap;
+}
+.input-row input{
+  flex:1;
+  height:40px;
+}
+
+/* hacer que el grid pase a 1 columna en móviles */
+@media (max-width: 720px){
+  .grid-2{ grid-template-columns: 1fr; }
+}
+
+/* select con altura coherente */
+.field select{
+  min-height: 40px;
+  padding-right: 32px;
+}
+
+/* alineación más consistente de labels en bloques inline */
+.field .inline{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+/* reducir margen en subtítulos pequeños dentro de fields */
+.field h5, .field H5{
+  margin: 4px 0 0 0;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}

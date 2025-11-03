@@ -1,391 +1,853 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>Formulario de Matrícula</title>
   <link th:href="@{/css/site.css}" rel="stylesheet">
 </head>
+
 <body>
 
-<!-- AQUÍ reemplazamos con el fragmento y le PASAMOS el bloque #page -->
-<div th:replace="~{layout :: content(~{::#page})}">
-  <!-- Este bloque #page es el PARÁMETRO que se envía al layout -->
-  <section id="page">
+  <!-- AQUÍ reemplazamos con el fragmento y le PASAMOS el bloque #page -->
+  <div th:replace="~{layout :: content(~{::#page})}">
+    <!-- Este bloque #page es el PARÁMETRO que se envía al layout -->
+    <section id="page">
 
-    <section class="page-head">
-      <h1>Formulario de Matrícula 2026</h1>
-      <p class="lead">Completa los datos en cada sección. Los campos con * son obligatorios.</p>
-      <div th:if="${msgError}" class="alert alert-danger" th:text="${msgError}"></div>
+      <section class="page-head">
+        <h1>Formulario de Matrícula 2026</h1>
+        <p class="lead">Completa los datos en cada sección. Los campos con * son obligatorios.</p>
+        <div th:if="${msgError}" class="alert alert-danger" th:text="${msgError}"></div>
+      </section>
+
+      <form th:action="@{/matriculas/form}" th:object="${matricula}" method="post" class="form-card">
+
+        <!-- =================== ALUMNO =================== -->
+        <div class="card">
+          <div class="card-head">
+            <h2>Datos del Alumno</h2>
+          </div>
+          <div class="card-body grid-2">
+            <div class="field">
+              <label>RUT *</label>
+              <input type="text" th:field="*{rutAlumno}" required>
+            </div>
+            <div class="field">
+              <label>Nombres *</label>
+              <input type="text" th:field="*{nombresAlumno}" required>
+            </div>
+            <div class="field">
+              <label>Apellido Paterno *</label>
+              <input type="text" th:field="*{apellidoPaternoAlumno}" required>
+            </div>
+            <div class="field">
+              <label>Apellido Materno *</label>
+              <input type="text" th:field="*{apellidoMaternoAlumno}" required>
+            </div>
+            <div class="field">
+              <label>Curso *</label>
+              <select class="form-select" th:field="*{cursoAlumno}" name="curso" required>
+                <option value="">Seleccione un curso</option>
+                <option value="PRE-KINDER A">PRE-KINDER A</option>
+                <option value="PRE-KINDER B">PRE-KINDER B</option>
+                <option value="KINDER A">KINDER A</option>
+                <option value="KINDER B">KINDER B</option>
+                <option value="KINDER C">KINDER C</option>
+                <option value="KINDER D">KINDER D</option>
+                <option value="1°A">1°A</option>
+                <option value="1°B">1°B</option>
+                <option value="2°A">2°A</option>
+                <option value="2°B">2°B</option>
+                <option value="3°A">3°A</option>
+                <option value="3°B">3°B</option>
+                <option value="3°C">3°C</option>
+                <option value="4°A">4°A</option>
+                <option value="4°B">4°B</option>
+                <option value="4°C">4°C</option>
+                <option value="5°A">5°A</option>
+                <option value="5°B">5°B</option>
+                <option value="5°C">5°C</option>
+                <option value="6°A">6°A</option>
+                <option value="6°B">6°B</option>
+                <option value="6°C">6°C</option>
+                <option value="7°A">7°A</option>
+                <option value="7°B">7°B</option>
+                <option value="7°C">7°C</option>
+                <option value="8°A">8°A</option>
+                <option value="8°B">8°B</option>
+                <option value="8°C">8°C</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Fecha Nacimiento *</label>
+              <input type="date" th:field="*{fechaNacimientoAlumno}" required>
+            </div>
+            <div class="field">
+              <label>Nacionalidad *</label>
+              <select class="form-select" th:field="*{nacionalidadAlumno}" name="nacionalidadAlumno" required>
+                <option value="">Seleccione su Nacionalidad</option>
+                <option value="CHILE">CHILE</option>
+                <option value="VENEZUELA">VENEZUELA</option>
+                <option value="COLOMBIA">COLOMBIA</option>
+                <option value="HAITI">HAITI</option>
+                <option value="PERU">PERU</option>
+                <option value="BOLIVIA">BOLIVIA</option>
+                <option value="ARGENTINA">ARGENTINA</option>
+                <option value="ECUADOR">ECUADOR</option>
+                <option value="OTRA">OTRA</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Edad</label>
+              <input type="number" th:field="*{edadAlumno}" min="0">
+            </div>
+            <div class="field">
+              <label>Dirección *</label>
+              <span>(nombre de la calle y numero)</span>
+              <input type="text" th:field="*{direccionAlumno}" required>
+            </div>
+            <div class="field">
+              <label>Comuna *</label>
+              <select class="form-select" th:field="*{comunaAlumno}" name="comunaAlumno" required>
+                <option value="" disabled selected>Seleccione su comuna</option>
+                <option value="Alhué">Alhué</option>
+                <option value="Buin">Buin</option>
+                <option value="Calera de Tango">Calera de Tango</option>
+                <option value="Cerrillos">Cerrillos</option>
+                <option value="Cerro Navia">Cerro Navia</option>
+                <option value="Colina">Colina</option>
+                <option value="Conchalí">Conchalí</option>
+                <option value="Curacaví">Curacaví</option>
+                <option value="El Bosque">El Bosque</option>
+                <option value="El Monte">El Monte</option>
+                <option value="Estación Central">Estación Central</option>
+                <option value="Huechuraba">Huechuraba</option>
+                <option value="Independencia">Independencia</option>
+                <option value="Isla de Maipo">Isla de Maipo</option>
+                <option value="La Cisterna">La Cisterna</option>
+                <option value="La Florida">La Florida</option>
+                <option value="La Granja">La Granja</option>
+                <option value="La Pintana">La Pintana</option>
+                <option value="La Reina">La Reina</option>
+                <option value="Lampa">Lampa</option>
+                <option value="Las Condes">Las Condes</option>
+                <option value="Lo Barnechea">Lo Barnechea</option>
+                <option value="Lo Espejo">Lo Espejo</option>
+                <option value="Lo Prado">Lo Prado</option>
+                <option value="Macul">Macul</option>
+                <option value="Maipú">Maipú</option>
+                <option value="María Pinto">María Pinto</option>
+                <option value="Melipilla">Melipilla</option>
+                <option value="Ñuñoa">Ñuñoa</option>
+                <option value="Padre Hurtado">Padre Hurtado</option>
+                <option value="Paine">Paine</option>
+                <option value="Pedro Aguirre Cerda">Pedro Aguirre Cerda</option>
+                <option value="Peñaflor">Peñaflor</option>
+                <option value="Peñalolén">Peñalolén</option>
+                <option value="Pirque">Pirque</option>
+                <option value="Providencia">Providencia</option>
+                <option value="Pudahuel">Pudahuel</option>
+                <option value="Puente Alto">Puente Alto</option>
+                <option value="Quilicura">Quilicura</option>
+                <option value="Quinta Normal">Quinta Normal</option>
+                <option value="Recoleta">Recoleta</option>
+                <option value="Renca">Renca</option>
+                <option value="San Bernardo">San Bernardo</option>
+                <option value="San Joaquín">San Joaquín</option>
+                <option value="San José de Maipo">San José de Maipo</option>
+                <option value="San Miguel">San Miguel</option>
+                <option value="San Pedro">San Pedro</option>
+                <option value="San Ramón">San Ramón</option>
+                <option value="Santiago">Santiago (Comuna Central)</option>
+                <option value="Talagante">Talagante</option>
+                <option value="Tiltil">Tiltil</option>
+                <option value="Vitacura">Vitacura</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Vive con</label>
+              <select class="form-select" th:field="*{viveConAlumno}" name="viveConAlumno" required>
+                <option value="" disabled selected>Seleccione...</option>
+                <option value="Padre">Padre</option>
+                <option value="Madre">Madre</option>
+                <option value="Ambos padres">Ambos padres</option>
+                <option value="Otro familiar">Otro familiar</option>
+                <option value="Acogida">Acogida</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>CESFAM</label><span>(nombre del cesfam)</span>
+              <input type="text" th:field="*{cesfamAlumno}">
+            </div>
+            <div class="field full">
+              <label>¿La alumna recibe atencion de salud mental?¿donde?</label>
+              <input type="text" th:field="*{saludMentalAlumno}">
+            </div>
+          </div>
+        </div>
+
+        <!-- =================== APODERADO TITULAR =================== -->
+        <div class="card">
+          <div class="card-head">
+            <h2>Apoderado Titular</h2>
+          </div>
+          <div class="card-body grid-2" id="titular-section">
+            <div class="field">
+              <label>RUT *</label>
+              <input type="text" th:field="*{rutApoderadoTitular}" id="tit_rut" required>
+            </div>
+            <div class="field">
+              <label>Nombres *</label>
+              <input type="text" th:field="*{nombresApoderadoTitular}" id="tit_nombres" required>
+            </div>
+            <div class="field">
+              <label>Apellido Paterno *</label>
+              <input type="text" th:field="*{apellidoPaternoApoderadoTitular}" id="tit_apPat" required>
+            </div>
+            <div class="field">
+              <label>Apellido Materno *</label>
+              <input type="text" th:field="*{apellidoMaternoApoderadoTitular}" id="tit_apMat" required>
+            </div>
+            <div class="field">
+              <label>Parentesco *</label>
+              <select name="parentescoApoderadoTitular" id="tit_parentesco" th:field="*{parentescoApoderadoTitular}">
+                <option value="" disabled selected>Seleccione...</option>
+                <option value="PADRE">PADRE</option>
+                <option value="MADRE">MADRE</option>
+                <option value="ABUELO/A">ABUELO/A</option>
+                <option value="TIO/A">TIO/A</option>
+                <option value="TUTOR">TUTOR</option>
+                <option value="OTRO">OTRO</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Correo *</label>
+              <input type="email" th:field="*{correoApoderadoTitular}" id="tit_correo" required>
+            </div>
+            <div class="field">
+              <label>Teléfono 1</label>
+              <span class="prefix">+569</span><input type="text" th:field="*{telefono1ApoderadoTitular}" id="tit_tel1">
+            </div>
+            <div class="field">
+              <label>Teléfono 2</label>
+              <span class="prefix">+569</span><input type="text" th:field="*{telefono2ApoderadoTitular}" id="tit_tel2">
+            </div>
+            <div class="field">
+              <label>Dirección</label>
+              <input type="text" th:field="*{direccionApoderadoTitular}" id="tit_dir">
+            </div>
+            <div class="field">
+              <label>Comuna</label>
+              <select class="form-select" th:field="*{comunaApoderadoTitular}" id="tit_comuna" required>
+                <option value="" disabled selected>Seleccione su comuna</option>
+                <option value="Alhué">Alhué</option>
+                <option value="Buin">Buin</option>
+                <option value="Calera de Tango">Calera de Tango</option>
+                <option value="Cerrillos">Cerrillos</option>
+                <option value="Cerro Navia">Cerro Navia</option>
+                <option value="Colina">Colina</option>
+                <option value="Conchalí">Conchalí</option>
+                <option value="Curacaví">Curacaví</option>
+                <option value="El Bosque">El Bosque</option>
+                <option value="El Monte">El Monte</option>
+                <option value="Estación Central">Estación Central</option>
+                <option value="Huechuraba">Huechuraba</option>
+                <option value="Independencia">Independencia</option>
+                <option value="Isla de Maipo">Isla de Maipo</option>
+                <option value="La Cisterna">La Cisterna</option>
+                <option value="La Florida">La Florida</option>
+                <option value="La Granja">La Granja</option>
+                <option value="La Pintana">La Pintana</option>
+                <option value="La Reina">La Reina</option>
+                <option value="Lampa">Lampa</option>
+                <option value="Las Condes">Las Condes</option>
+                <option value="Lo Barnechea">Lo Barnechea</option>
+                <option value="Lo Espejo">Lo Espejo</option>
+                <option value="Lo Prado">Lo Prado</option>
+                <option value="Macul">Macul</option>
+                <option value="Maipú">Maipú</option>
+                <option value="María Pinto">María Pinto</option>
+                <option value="Melipilla">Melipilla</option>
+                <option value="Ñuñoa">Ñuñoa</option>
+                <option value="Padre Hurtado">Padre Hurtado</option>
+                <option value="Paine">Paine</option>
+                <option value="Pedro Aguirre Cerda">Pedro Aguirre Cerda</option>
+                <option value="Peñaflor">Peñaflor</option>
+                <option value="Peñalolén">Peñalolén</option>
+                <option value="Pirque">Pirque</option>
+                <option value="Providencia">Providencia</option>
+                <option value="Pudahuel">Pudahuel</option>
+                <option value="Puente Alto">Puente Alto</option>
+                <option value="Quilicura">Quilicura</option>
+                <option value="Quinta Normal">Quinta Normal</option>
+                <option value="Recoleta">Recoleta</option>
+                <option value="Renca">Renca</option>
+                <option value="San Bernardo">San Bernardo</option>
+                <option value="San Joaquín">San Joaquín</option>
+                <option value="San José de Maipo">San José de Maipo</option>
+                <option value="San Miguel">San Miguel</option>
+                <option value="San Pedro">San Pedro</option>
+                <option value="San Ramón">San Ramón</option>
+                <option value="Santiago">Santiago (Comuna Central)</option>
+                <option value="Talagante">Talagante</option>
+                <option value="Tiltil">Tiltil</option>
+                <option value="Vitacura">Vitacura</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Nacionalidad</label>
+              <select class="form-select" th:field="*{nacionalidadApoderadoTitular}" id="tit_nac" required>
+                <option value="">Seleccione su Nacionalidad</option>
+                <option value="CHILE">CHILE</option>
+                <option value="VENEZUELA">VENEZUELA</option>
+                <option value="COLOMBIA">COLOMBIA</option>
+                <option value="HAITI">HAITI</option>
+                <option value="PERU">PERU</option>
+                <option value="BOLIVIA">BOLIVIA</option>
+                <option value="ARGENTINA">ARGENTINA</option>
+                <option value="ECUADOR">ECUADOR</option>
+                <option value="OTRA">OTRA</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Fecha Nacimiento</label>
+              <input type="date" th:field="*{fechaNacimientoApoderadoTitular}" id="tit_fnac">
+            </div>
+
+            <div class="field full checks-inline">
+              <label class="check">
+                <input type="checkbox" id="tit_es_padre"> Es Padre
+              </label>
+              <label class="check">
+                <input type="checkbox" id="tit_es_madre"> Es Madre
+              </label>
+              <small>Si marcas, se copiarán estos datos a la sección correspondiente.</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================== APODERADO SUPLENTE =================== -->
+        <div class="card">
+          <div class="card-head">
+            <h2>Apoderado Suplente</h2>
+          </div>
+          <div class="card-body grid-2" id="suplente-section">
+            <div class="field">
+              <label>RUT</label>
+              <input type="text" th:field="*{rutApoderadoSuplente}" id="sup_rut">
+            </div>
+            <div class="field">
+              <label>Nombres</label>
+              <input type="text" th:field="*{nombresApoderadoSuplente}" id="sup_nombres">
+            </div>
+            <div class="field">
+              <label>Apellido Paterno</label>
+              <input type="text" th:field="*{apellidoPaternoApoderadoSuplente}" id="sup_apPat">
+            </div>
+            <div class="field">
+              <label>Apellido Materno</label>
+              <input type="text" th:field="*{apellidoMaternoApoderadoSuplente}" id="sup_apMat">
+            </div>
+            <div class="field">
+              <label>Parentesco</label>
+              <select name="parentescoApoderadoSuplente" id="sup_parentesco" th:field="*{parentescoApoderadoSuplente}">
+                <option value="" disabled selected>Seleccione...</option>
+                <option value="PADRE">PADRE</option>
+                <option value="MADRE">MADRE</option>
+                <option value="ABUELO/A">ABUELO/A</option>
+                <option value="TIO/A">TIO/A</option>
+                <option value="TUTOR">TUTOR</option>
+                <option value="OTRO">OTRO</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Correo *</label>
+              <input type="email" th:field="*{correoApoderadoSuplente}" id="sup_correo" required>
+            </div>
+            <div class="field">
+              <label>Teléfono 1</label>
+              <span class="prefix">+569</span><input type="text" th:field="*{telefono1ApoderadoSuplente}" id="sup_tel1">
+            </div>
+            <div class="field">
+              <label>Teléfono 2</label>
+              <span class="prefix">+569</span><input type="text" th:field="*{telefono2ApoderadoSuplente}" id="sup_tel2">
+            </div>
+            <div class="field">
+              <label>Dirección</label>
+              <input type="text" th:field="*{direccionApoderadoSuplente}" id="sup_dir">
+            </div>
+            <div class="field">
+              <label>Comuna</label>
+              <select class="form-select" th:field="*{comunaApoderadoSuplente}" id="sup_comuna" required>
+                <option value="" disabled selected>Seleccione su comuna</option>
+                <option value="Alhué">Alhué</option>
+                <option value="Buin">Buin</option>
+                <option value="Calera de Tango">Calera de Tango</option>
+                <option value="Cerrillos">Cerrillos</option>
+                <option value="Cerro Navia">Cerro Navia</option>
+                <option value="Colina">Colina</option>
+                <option value="Conchalí">Conchalí</option>
+                <option value="Curacaví">Curacaví</option>
+                <option value="El Bosque">El Bosque</option>
+                <option value="El Monte">El Monte</option>
+                <option value="Estación Central">Estación Central</option>
+                <option value="Huechuraba">Huechuraba</option>
+                <option value="Independencia">Independencia</option>
+                <option value="Isla de Maipo">Isla de Maipo</option>
+                <option value="La Cisterna">La Cisterna</option>
+                <option value="La Florida">La Florida</option>
+                <option value="La Granja">La Granja</option>
+                <option value="La Pintana">La Pintana</option>
+                <option value="La Reina">La Reina</option>
+                <option value="Lampa">Lampa</option>
+                <option value="Las Condes">Las Condes</option>
+                <option value="Lo Barnechea">Lo Barnechea</option>
+                <option value="Lo Espejo">Lo Espejo</option>
+                <option value="Lo Prado">Lo Prado</option>
+                <option value="Macul">Macul</option>
+                <option value="Maipú">Maipú</option>
+                <option value="María Pinto">María Pinto</option>
+                <option value="Melipilla">Melipilla</option>
+                <option value="Ñuñoa">Ñuñoa</option>
+                <option value="Padre Hurtado">Padre Hurtado</option>
+                <option value="Paine">Paine</option>
+                <option value="Pedro Aguirre Cerda">Pedro Aguirre Cerda</option>
+                <option value="Peñaflor">Peñaflor</option>
+                <option value="Peñalolén">Peñalolén</option>
+                <option value="Pirque">Pirque</option>
+                <option value="Providencia">Providencia</option>
+                <option value="Pudahuel">Pudahuel</option>
+                <option value="Puente Alto">Puente Alto</option>
+                <option value="Quilicura">Quilicura</option>
+                <option value="Quinta Normal">Quinta Normal</option>
+                <option value="Recoleta">Recoleta</option>
+                <option value="Renca">Renca</option>
+                <option value="San Bernardo">San Bernardo</option>
+                <option value="San Joaquín">San Joaquín</option>
+                <option value="San José de Maipo">San José de Maipo</option>
+                <option value="San Miguel">San Miguel</option>
+                <option value="San Pedro">San Pedro</option>
+                <option value="San Ramón">San Ramón</option>
+                <option value="Santiago">Santiago (Comuna Central)</option>
+                <option value="Talagante">Talagante</option>
+                <option value="Tiltil">Tiltil</option>
+                <option value="Vitacura">Vitacura</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Nacionalidad</label>
+              <select class="form-select" th:field="*{nacionalidadApoderadoSuplente}" id="sup_nac" required>
+                <option value="">Seleccione su Nacionalidad</option>
+                <option value="CHILE">CHILE</option>
+                <option value="VENEZUELA">VENEZUELA</option>
+                <option value="COLOMBIA">COLOMBIA</option>
+                <option value="HAITI">HAITI</option>
+                <option value="PERU">PERU</option>
+                <option value="BOLIVIA">BOLIVIA</option>
+                <option value="ARGENTINA">ARGENTINA</option>
+                <option value="ECUADOR">ECUADOR</option>
+                <option value="OTRA">OTRA</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Fecha Nacimiento</label>
+              <input type="date" th:field="*{fechaNacimientoApoderadoSuplente}" id="sup_fnac">
+            </div>
+
+            <div class="field full checks-inline">
+              <label class="check">
+                <input type="checkbox" id="sup_es_padre"> Es Padre
+              </label>
+              <label class="check">
+                <input type="checkbox" id="sup_es_madre"> Es Madre
+              </label>
+              <small>Si marcas, se copiarán estos datos a la sección correspondiente.</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================== MADRE =================== -->
+        <div class="card">
+          <div class="card-head">
+            <h2>Datos de la Madre</h2>
+          </div>
+          <div class="card-body grid-2" id="madre-section">
+            <div class="field"><label>RUT</label>
+              <input type="text" th:field="*{rutMadre}" id="mad_rut">
+            </div>
+            <div class="field"><label>Nombres</label>
+              <input type="text" th:field="*{nombresMadre}" id="mad_nombres">
+            </div>
+            <div class="field"><label>Apellido Paterno</label>
+              <input type="text" th:field="*{apellidoPaternoMadre}" id="mad_apPat">
+            </div>
+            <div class="field"><label>Apellido Materno</label>
+              <input type="text" th:field="*{apellidoMaternoMadre}" id="mad_apMat">
+            </div>
+            <div class="field"><label>Nacionalidad</label>
+              <select class="form-select" th:field="*{nacionalidadMadre}" id="mad_nac" required>
+                <option value="">Seleccione la Nacionalidad</option>
+                <option value="CHILE">CHILE</option>
+                <option value="VENEZUELA">VENEZUELA</option>
+                <option value="COLOMBIA">COLOMBIA</option>
+                <option value="HAITI">HAITI</option>
+                <option value="PERU">PERU</option>
+                <option value="BOLIVIA">BOLIVIA</option>
+                <option value="ARGENTINA">ARGENTINA</option>
+                <option value="ECUADOR">ECUADOR</option>
+                <option value="OTRA">OTRA</option>
+              </select>
+            </div>
+            <div class="field"><label>Fecha Nacimiento</label>
+              <input type="date" th:field="*{fechaNacimientoMadre}" id="mad_fnac">
+            </div>
+            <div class="field"><label>Dirección</label><input type="text" th:field="*{direccionMadre}" id="mad_dir">
+            </div>
+            <div class="field"><label>Comuna</label>
+              <select class="form-select" th:field="*{comunaMadre}" id="mad_comuna" required>
+                <option value="" disabled selected>Seleccione su comuna</option>
+                <option value="Alhué">Alhué</option>
+                <option value="Buin">Buin</option>
+                <option value="Calera de Tango">Calera de Tango</option>
+                <option value="Cerrillos">Cerrillos</option>
+                <option value="Cerro Navia">Cerro Navia</option>
+                <option value="Colina">Colina</option>
+                <option value="Conchalí">Conchalí</option>
+                <option value="Curacaví">Curacaví</option>
+                <option value="El Bosque">El Bosque</option>
+                <option value="El Monte">El Monte</option>
+                <option value="Estación Central">Estación Central</option>
+                <option value="Huechuraba">Huechuraba</option>
+                <option value="Independencia">Independencia</option>
+                <option value="Isla de Maipo">Isla de Maipo</option>
+                <option value="La Cisterna">La Cisterna</option>
+                <option value="La Florida">La Florida</option>
+                <option value="La Granja">La Granja</option>
+                <option value="La Pintana">La Pintana</option>
+                <option value="La Reina">La Reina</option>
+                <option value="Lampa">Lampa</option>
+                <option value="Las Condes">Las Condes</option>
+                <option value="Lo Barnechea">Lo Barnechea</option>
+                <option value="Lo Espejo">Lo Espejo</option>
+                <option value="Lo Prado">Lo Prado</option>
+                <option value="Macul">Macul</option>
+                <option value="Maipú">Maipú</option>
+                <option value="María Pinto">María Pinto</option>
+                <option value="Melipilla">Melipilla</option>
+                <option value="Ñuñoa">Ñuñoa</option>
+                <option value="Padre Hurtado">Padre Hurtado</option>
+                <option value="Paine">Paine</option>
+                <option value="Pedro Aguirre Cerda">Pedro Aguirre Cerda</option>
+                <option value="Peñaflor">Peñaflor</option>
+                <option value="Peñalolén">Peñalolén</option>
+                <option value="Pirque">Pirque</option>
+                <option value="Providencia">Providencia</option>
+                <option value="Pudahuel">Pudahuel</option>
+                <option value="Puente Alto">Puente Alto</option>
+                <option value="Quilicura">Quilicura</option>
+                <option value="Quinta Normal">Quinta Normal</option>
+                <option value="Recoleta">Recoleta</option>
+                <option value="Renca">Renca</option>
+                <option value="San Bernardo">San Bernardo</option>
+                <option value="San Joaquín">San Joaquín</option>
+                <option value="San José de Maipo">San José de Maipo</option>
+                <option value="San Miguel">San Miguel</option>
+                <option value="San Pedro">San Pedro</option>
+                <option value="San Ramón">San Ramón</option>
+                <option value="Santiago">Santiago (Comuna Central)</option>
+                <option value="Talagante">Talagante</option>
+                <option value="Tiltil">Tiltil</option>
+                <option value="Vitacura">Vitacura</option>
+              </select>
+            </div>
+            <div class="field"><label>Teléfono 1</label>
+              <span class="prefix">+569</span><input type="text" th:field="*{telefono1Madre}" id="mad_tel1">
+            </div>
+            <div class="field"><label>Teléfono 2</label>
+              <span class="prefix">+569</span><input type="text" th:field="*{telefono2Madre}" id="mad_tel2">
+            </div>
+            <div class="field"><label>Correo</label><input type="email" th:field="*{correoMadre}" id="mad_correo"></div>
+            <div class="field"><label>Nivel Educación</label>
+              <select class="form-select" th:field="*{nivelEducacionMadre}" id="mad_nivel" required>
+                <option value="" disabled selected>Seleccione su nivel educacional</option>
+                <option value="Basica Incompleta">Básica incompleta</option>
+                <option value="Basica Completa">Básica Completa</option>
+                <option value="Media Incompleta">Media Incompleta</option>
+                <option value="Media Completa">Media Completa</option>
+                <option value="Tecnico Nivel Medio">Técnico Nivel Medio</option>
+                <option value="Tecnico Nivel Superior">Técnico Nivel Superior</option>
+                <option value="Universitaria Incompleta">Universitaria Incompleta</option>
+                <option value="Universitaria Completa">Universitaria Completa</option>
+                <option value="Postgrado">Postgrado</option>
+              </select>
+            </div>
+            <div class="field"><label>Ocupación</label>
+              <select class="form-select" th:field="*{ocupacionMadre}" id="mad_ocup" required>
+                <option value="" disabled selected>Seleccione su ocupación</option>
+                <option value="desempleado">desempleado</option>
+                <option value="empleado sector privado">empleado sector privado</option>
+                <option value="empleado sector público">empleado sector público</option>
+                <option value="trabajador independiente">trabajador independiente</option>
+                <option value="dueña de casa">dueña de casa</option>
+                <option value="jubilado/pensionado">jubilado/pensionado</option>
+              </select>
+            </div>
+          </div>
+        </div>
+          <!-- =================== PADRE =================== -->
+          <div class="card">
+            <div class="card-head">
+              <h2>Datos del Padre (opcional)</h2>
+            </div>
+            <div class="card-body grid-2" id="padre-section">
+              <div class="field"><label>RUT</label><input type="text" th:field="*{rutPadre}" id="pad_rut"></div>
+              <div class="field"><label>Nombres</label><input type="text" th:field="*{nombresPadre}" id="pad_nombres">
+              </div>
+              <div class="field"><label>Apellido Paterno</label><input type="text" th:field="*{apellidoPaternoPadre}"
+                  id="pad_apPat"></div>
+              <div class="field"><label>Apellido Materno</label><input type="text" th:field="*{apellidoMaternoPadre}"
+                  id="pad_apMat"></div>
+              <div class="field"><label>Nacionalidad</label>
+                <select class="form-select" th:field="*{nacionalidadPadre}" id="pad_nac" required>
+                  <option value="">Seleccione la Nacionalidad</option>
+                  <option value="CHILE">CHILE</option>
+                  <option value="VENEZUELA">VENEZUELA</option>
+                  <option value="COLOMBIA">COLOMBIA</option>
+                  <option value="HAITI">HAITI</option>
+                  <option value="PERU">PERU</option>
+                  <option value="BOLIVIA">BOLIVIA</option>
+                  <option value="ARGENTINA">ARGENTINA</option>
+                  <option value="ECUADOR">ECUADOR</option>
+                  <option value="OTRA">OTRA</option>
+                </select>
+              </div>
+              <div class="field"><label>Fecha Nacimiento</label><input type="date" th:field="*{fechaNacimientoPadre}"
+                  id="pad_fnac"></div>
+              <div class="field"><label>Dirección</label><input type="text" th:field="*{direccionPadre}" id="pad_dir">
+              </div>
+              <div class="field"><label>Comuna</label>
+                <select class="form-select" th:field="*{comunaPadre}" id="pad_comuna" required>
+                  <option value="" disabled selected>Seleccione su comuna</option>
+                  <option value="Alhué">Alhué</option>
+                  <option value="Buin">Buin</option>
+                  <option value="Calera de Tango">Calera de Tango</option>
+                  <option value="Cerrillos">Cerrillos</option>
+                  <option value="Cerro Navia">Cerro Navia</option>
+                  <option value="Colina">Colina</option>
+                  <option value="Conchalí">Conchalí</option>
+                  <option value="Curacaví">Curacaví</option>
+                  <option value="El Bosque">El Bosque</option>
+                  <option value="El Monte">El Monte</option>
+                  <option value="Estación Central">Estación Central</option>
+                  <option value="Huechuraba">Huechuraba</option>
+                  <option value="Independencia">Independencia</option>
+                  <option value="Isla de Maipo">Isla de Maipo</option>
+                  <option value="La Cisterna">La Cisterna</option>
+                  <option value="La Florida">La Florida</option>
+                  <option value="La Granja">La Granja</option>
+                  <option value="La Pintana">La Pintana</option>
+                  <option value="La Reina">La Reina</option>
+                  <option value="Lampa">Lampa</option>
+                  <option value="Las Condes">Las Condes</option>
+                  <option value="Lo Barnechea">Lo Barnechea</option>
+                  <option value="Lo Espejo">Lo Espejo</option>
+                  <option value="Lo Prado">Lo Prado</option>
+                  <option value="Macul">Macul</option>
+                  <option value="Maipú">Maipú</option>
+                  <option value="María Pinto">María Pinto</option>
+                  <option value="Melipilla">Melipilla</option>
+                  <option value="Ñuñoa">Ñuñoa</option>
+                  <option value="Padre Hurtado">Padre Hurtado</option>
+                  <option value="Paine">Paine</option>
+                  <option value="Pedro Aguirre Cerda">Pedro Aguirre Cerda</option>
+                  <option value="Peñaflor">Peñaflor</option>
+                  <option value="Peñalolén">Peñalolén</option>
+                  <option value="Pirque">Pirque</option>
+                  <option value="Providencia">Providencia</option>
+                  <option value="Pudahuel">Pudahuel</option>
+                  <option value="Puente Alto">Puente Alto</option>
+                  <option value="Quilicura">Quilicura</option>
+                  <option value="Quinta Normal">Quinta Normal</option>
+                  <option value="Recoleta">Recoleta</option>
+                  <option value="Renca">Renca</option>
+                  <option value="San Bernardo">San Bernardo</option>
+                  <option value="San Joaquín">San Joaquín</option>
+                  <option value="San José de Maipo">San José de Maipo</option>
+                  <option value="San Miguel">San Miguel</option>
+                  <option value="San Pedro">San Pedro</option>
+                  <option value="San Ramón">San Ramón</option>
+                  <option value="Santiago">Santiago (Comuna Central)</option>
+                  <option value="Talagante">Talagante</option>
+                  <option value="Tiltil">Tiltil</option>
+                  <option value="Vitacura">Vitacura</option>
+                </select>
+              </div>
+              <div class="field"><label>Teléfono 1</label><span class="prefix">+569</span><input type="text"
+                  th:field="*{telefono1Padre}" id="pad_tel1"></div>
+              <div class="field"><label>Teléfono 2</label><span class="prefix">+569</span><input type="text"
+                  th:field="*{telefono2Padre}" id="pad_tel2"></div>
+              <div class="field"><label>Correo</label><input type="email" th:field="*{correoPadre}" id="pad_correo">
+              </div>
+              <div class="field"><label>Nivel Educación</label>
+                <select class="form-select" th:field="*{nivelEducacionPadre}" id="pad_nivel" required>
+                  <option value="" disabled selected>Seleccione su nivel educacional</option>
+                  <option value="Basica Incompleta">Básica incompleta</option>
+                  <option value="Basica Completa">Básica Completa</option>
+                  <option value="Media Incompleta">Media Incompleta</option>
+                  <option value="Media Completa">Media Completa</option>
+                  <option value="Tecnico Nivel Medio">Técnico Nivel Medio</option>
+                  <option value="Tecnico Nivel Superior">Técnico Nivel Superior</option>
+                  <option value="Universitaria Incompleta">Universitaria Incompleta</option>
+                  <option value="Universitaria Completa">Universitaria Completa</option>
+                  <option value="Postgrado">Postgrado</option>
+                </select>
+              </div>
+              <div class="field"><label>Ocupación</label>
+                <select class="form-select" th:field="*{ocupacionPadre}" id="pad_ocup" required>
+                  <option value="" disabled selected>Seleccione su ocupación</option>
+                  <option value="desempleado">desempleado</option>
+                  <option value="empleado sector privado">empleado sector privado</option>
+                  <option value="empleado sector público">empleado sector público</option>
+                  <option value="trabajador independiente">trabajador independiente</option>
+                  <option value="dueña de casa">dueña de casa</option>
+                  <option value="jubilado/pensionado">jubilado/pensionado</option>
+                </select>
+              </div>
+            </div>
+            <div class="actions">
+              <button type="submit" class="btn-primary">Enviar Matrícula</button>
+            </div>
+          </div>
+
+
+      </form>
     </section>
-
-    <form th:action="@{/matriculas/form}" th:object="${matricula}" method="post" class="form-card">
-      
-  <!-- =================== ALUMNO =================== -->
-  <div class="card">
-    <div class="card-head">
-      <h2>Datos del Alumno</h2>
-    </div>
-    <div class="card-body grid-2">
-      <div class="field">
-        <label>RUT *</label>
-        <input type="text" th:field="*{rutAlumno}" required>
-      </div>
-      <div class="field">
-        <label>Nombres *</label>
-        <input type="text" th:field="*{nombresAlumno}" required>
-      </div>
-      <div class="field">
-        <label>Apellido Paterno *</label>
-        <input type="text" th:field="*{apellidoPaternoAlumno}" required>
-      </div>
-      <div class="field">
-        <label>Apellido Materno *</label>
-        <input type="text" th:field="*{apellidoMaternoAlumno}" required>
-      </div>
-      <div class="field">
-        <label>Curso *</label>
-        <input type="text" th:field="*{cursoAlumno}" placeholder="p.ej. 3° Básico A" required>
-      </div>
-      <div class="field">
-        <label>Fecha Nacimiento *</label>
-        <input type="date" th:field="*{fechaNacimientoAlumno}" required>
-      </div>
-      <div class="field">
-        <label>Nacionalidad *</label>
-        <input type="text" th:field="*{nacionalidadAlumno}" required>
-      </div>
-      <div class="field">
-        <label>Edad</label>
-        <input type="number" th:field="*{edadAlumno}" min="0">
-      </div>
-      <div class="field">
-        <label>Dirección *</label>
-        <input type="text" th:field="*{direccionAlumno}" required>
-      </div>
-      <div class="field">
-        <label>Comuna *</label>
-        <input type="text" th:field="*{comunaAlumno}" required>
-      </div>
-      <div class="field">
-        <label>Vive con</label>
-        <input type="text" th:field="*{viveConAlumno}">
-      </div>
-      <div class="field">
-        <label>CESFAM</label>
-        <input type="text" th:field="*{cesfamAlumno}">
-      </div>
-      <div class="field full">
-        <label>Salud mental / Observaciones</label>
-        <input type="text" th:field="*{saludMentalAlumno}">
-      </div>
-    </div>
   </div>
-
-  <!-- =================== APODERADO TITULAR =================== -->
-  <div class="card">
-    <div class="card-head">
-      <h2>Apoderado Titular</h2>
-    </div>
-    <div class="card-body grid-2" id="titular-section">
-      <div class="field">
-        <label>RUT *</label>
-        <input type="text" th:field="*{rutApoderadoTitular}" id="tit_rut" required>
-      </div>
-      <div class="field">
-        <label>Nombres *</label>
-        <input type="text" th:field="*{nombresApoderadoTitular}" id="tit_nombres" required>
-      </div>
-      <div class="field">
-        <label>Apellido Paterno *</label>
-        <input type="text" th:field="*{apellidoPaternoApoderadoTitular}" id="tit_apPat" required>
-      </div>
-      <div class="field">
-        <label>Apellido Materno *</label>
-        <input type="text" th:field="*{apellidoMaternoApoderadoTitular}" id="tit_apMat" required>
-      </div>
-      <div class="field">
-        <label>Parentesco *</label>
-        <input type="text" th:field="*{parentescoApoderadoTitular}" id="tit_parentesco" required>
-      </div>
-      <div class="field">
-        <label>Correo *</label>
-        <input type="email" th:field="*{correoApoderadoTitular}" id="tit_correo" required>
-      </div>
-      <div class="field">
-        <label>Teléfono 1</label>
-        <input type="text" th:field="*{telefono1ApoderadoTitular}" id="tit_tel1">
-      </div>
-      <div class="field">
-        <label>Teléfono 2</label>
-        <input type="text" th:field="*{telefono2ApoderadoTitular}" id="tit_tel2">
-      </div>
-      <div class="field">
-        <label>Dirección</label>
-        <input type="text" th:field="*{direccionApoderadoTitular}" id="tit_dir">
-      </div>
-      <div class="field">
-        <label>Comuna</label>
-        <input type="text" th:field="*{comunaApoderadoTitular}" id="tit_comuna">
-      </div>
-      <div class="field">
-        <label>Nacionalidad</label>
-        <input type="text" th:field="*{nacionalidadApoderadoTitular}" id="tit_nac">
-      </div>
-      <div class="field">
-        <label>Fecha Nacimiento</label>
-        <input type="date" th:field="*{fechaNacimientoApoderadoTitular}" id="tit_fnac">
-      </div>
-
-      <div class="field full checks-inline">
-        <label class="check">
-          <input type="checkbox" id="tit_es_padre"> Es Padre
-        </label>
-        <label class="check">
-          <input type="checkbox" id="tit_es_madre"> Es Madre
-        </label>
-        <small>Si marcas, se copiarán estos datos a la sección correspondiente.</small>
-      </div>
-    </div>
-  </div>
-
-  <!-- =================== APODERADO SUPLENTE =================== -->
-  <div class="card">
-    <div class="card-head">
-      <h2>Apoderado Suplente (opcional)</h2>
-    </div>
-    <div class="card-body grid-2" id="suplente-section">
-      <div class="field">
-        <label>RUT</label>
-        <input type="text" th:field="*{rutApoderadoSuplente}" id="sup_rut">
-      </div>
-      <div class="field">
-        <label>Nombres</label>
-        <input type="text" th:field="*{nombresApoderadoSuplente}" id="sup_nombres">
-      </div>
-      <div class="field">
-        <label>Apellido Paterno</label>
-        <input type="text" th:field="*{apellidoPaternoApoderadoSuplente}" id="sup_apPat">
-      </div>
-      <div class="field">
-        <label>Apellido Materno</label>
-        <input type="text" th:field="*{apellidoMaternoApoderadoSuplente}" id="sup_apMat">
-      </div>
-      <div class="field">
-        <label>Parentesco</label>
-        <input type="text" th:field="*{parentescoApoderadoSuplente}" id="sup_parentesco">
-      </div>
-      <div class="field">
-        <label>Teléfono 1</label>
-        <input type="text" th:field="*{telefono1ApoderadoSuplente}" id="sup_tel1">
-      </div>
-      <div class="field">
-        <label>Teléfono 2</label>
-        <input type="text" th:field="*{telefono2ApoderadoSuplente}" id="sup_tel2">
-      </div>
-      <div class="field">
-        <label>Dirección</label>
-        <input type="text" th:field="*{direccionApoderadoSuplente}" id="sup_dir">
-      </div>
-      <div class="field">
-        <label>Comuna</label>
-        <input type="text" th:field="*{comunaApoderadoSuplente}" id="sup_comuna">
-      </div>
-      <div class="field">
-        <label>Nacionalidad</label>
-        <input type="text" th:field="*{nacionalidadApoderadoSuplente}" id="sup_nac">
-      </div>
-      <div class="field">
-        <label>Fecha Nacimiento</label>
-        <input type="date" th:field="*{fechaNacimientoApoderadoSuplente}" id="sup_fnac">
-      </div>
-
-      <div class="field full checks-inline">
-        <label class="check">
-          <input type="checkbox" id="sup_es_padre"> Es Padre
-        </label>
-        <label class="check">
-          <input type="checkbox" id="sup_es_madre"> Es Madre
-        </label>
-        <small>Si marcas, se copiarán estos datos a la sección correspondiente.</small>
-      </div>
-    </div>
-  </div>
-
-  <!-- =================== MADRE =================== -->
-  <div class="card">
-    <div class="card-head">
-      <h2>Datos de la Madre (opcional)</h2>
-    </div>
-    <div class="card-body grid-2" id="madre-section">
-      <div class="field"><label>RUT</label><input type="text" th:field="*{rutMadre}" id="mad_rut"></div>
-      <div class="field"><label>Nombres</label><input type="text" th:field="*{nombresMadre}" id="mad_nombres"></div>
-      <div class="field"><label>Apellido Paterno</label><input type="text" th:field="*{apellidoPaternoMadre}" id="mad_apPat"></div>
-      <div class="field"><label>Apellido Materno</label><input type="text" th:field="*{apellidoMaternoMadre}" id="mad_apMat"></div>
-      <div class="field"><label>Nacionalidad</label><input type="text" th:field="*{nacionalidadMadre}" id="mad_nac"></div>
-      <div class="field"><label>Fecha Nacimiento</label><input type="date" th:field="*{fechaNacimientoMadre}" id="mad_fnac"></div>
-      <div class="field"><label>Dirección</label><input type="text" th:field="*{direccionMadre}" id="mad_dir"></div>
-      <div class="field"><label>Comuna</label><input type="text" th:field="*{comunaMadre}" id="mad_comuna"></div>
-      <div class="field"><label>Teléfono 1</label><input type="text" th:field="*{telefono1Madre}" id="mad_tel1"></div>
-      <div class="field"><label>Teléfono 2</label><input type="text" th:field="*{telefono2Madre}" id="mad_tel2"></div>
-      <div class="field"><label>Correo</label><input type="email" th:field="*{correoMadre}" id="mad_correo"></div>
-      <div class="field"><label>Nivel Educación</label><input type="text" th:field="*{nivelEducacionMadre}" id="mad_nivel"></div>
-      <div class="field"><label>Ocupación</label><input type="text" th:field="*{ocupacionMadre}" id="mad_ocup"></div>
-    </div>
-  </div>
-
-  <!-- =================== PADRE =================== -->
-  <div class="card">
-    <div class="card-head">
-      <h2>Datos del Padre (opcional)</h2>
-    </div>
-    <div class="card-body grid-2" id="padre-section">
-      <div class="field"><label>RUT</label><input type="text" th:field="*{rutPadre}" id="pad_rut"></div>
-      <div class="field"><label>Nombres</label><input type="text" th:field="*{nombresPadre}" id="pad_nombres"></div>
-      <div class="field"><label>Apellido Paterno</label><input type="text" th:field="*{apellidoPaternoPadre}" id="pad_apPat"></div>
-      <div class="field"><label>Apellido Materno</label><input type="text" th:field="*{apellidoMaternoPadre}" id="pad_apMat"></div>
-      <div class="field"><label>Nacionalidad</label><input type="text" th:field="*{nacionalidadPadre}" id="pad_nac"></div>
-      <div class="field"><label>Fecha Nacimiento</label><input type="date" th:field="*{fechaNacimientoPadre}" id="pad_fnac"></div>
-      <div class="field"><label>Dirección</label><input type="text" th:field="*{direccionPadre}" id="pad_dir"></div>
-      <div class="field"><label>Comuna</label><input type="text" th:field="*{comunaPadre}" id="pad_comuna"></div>
-      <div class="field"><label>Teléfono 1</label><input type="text" th:field="*{telefono1Padre}" id="pad_tel1"></div>
-      <div class="field"><label>Teléfono 2</label><input type="text" th:field="*{telefono2Padre}" id="pad_tel2"></div>
-      <div class="field"><label>Correo</label><input type="email" th:field="*{correoPadre}" id="pad_correo"></div>
-      <div class="field"><label>Nivel Educación</label><input type="text" th:field="*{nivelEducacionPadre}" id="pad_nivel"></div>
-      <div class="field"><label>Ocupación</label><input type="text" th:field="*{ocupacionPadre}" id="pad_ocup"></div>
-    </div>
-  </div>
-
-  <div class="actions">
-    <button type="submit" class="btn-primary">Enviar Matrícula</button>
-  </div>
-</form>
-  </section>
-</div>
 
 </body>
 <script>
-// ====== utilidades de mapeo ======
-function makePairs(fromPrefix, toPrefix) {
-  const base = [
-    ['_rut','_rut'],
-    ['_nombres','_nombres'],
-    ['_apPat','_apPat'],
-    ['_apMat','_apMat'],
-    ['_nac','_nac'],
-    ['_fnac','_fnac'],
-    ['_dir','_dir'],
-    ['_comuna','_comuna'],
-    ['_tel1','_tel1'],
-    ['_tel2','_tel2']
-  ];
-  // correo existe en padre/madre y en titular (en suplente puede faltar según tu HTML)
-  base.push(['_correo','_correo']);
+  // ====== utilidades de mapeo ======
+  function makePairs(fromPrefix, toPrefix) {
+    const base = [
+      ['_rut', '_rut'],
+      ['_nombres', '_nombres'],
+      ['_apPat', '_apPat'],
+      ['_apMat', '_apMat'],
+      ['_nac', '_nac'],
+      ['_fnac', '_fnac'],
+      ['_dir', '_dir'],
+      ['_comuna', '_comuna'],
+      ['_tel1', '_tel1'],
+      ['_tel2', '_tel2']
+    ];
+    // correo existe en padre/madre y en titular (en suplente puede faltar según tu HTML)
+    base.push(['_correo', '_correo']);
 
-  // nivel y ocupación solo existen en padre/madre; no se copian desde titular/suplente
-  return base.map(([a,b]) => [`${fromPrefix}${a}`, `${toPrefix}${b}`]);
-}
-
-function getEl(id){ return document.getElementById(id); }
-function copyValue(fromId, toId, override=false) {
-  const from = getEl(fromId), to = getEl(toId);
-  if (!from || !to) return;
-  if (override || !to.value) {
-    to.value = from.value;
-    to.dispatchEvent(new Event('input', {bubbles:true}));
-    to.dispatchEvent(new Event('change', {bubbles:true}));
+    // nivel y ocupación solo existen en padre/madre; no se copian desde titular/suplente
+    return base.map(([a, b]) => [`${fromPrefix}${a}`, `${toPrefix}${b}`]);
   }
-}
 
-// ====== gestor de sincronización (añadir/quitar listeners) ======
-const syncRegistry = new Map(); // key=checkboxId, value=array de {fromId, toId, handler}
-
-function startSync(checkboxId, pairs) {
-  // copia inicial
-  pairs.forEach(([fromId, toId]) => copyValue(fromId, toId, true));
-
-  // listeners en vivo
-  const entries = [];
-  pairs.forEach(([fromId, toId]) => {
-    const from = getEl(fromId);
-    if (!from) return;
-    const handler = () => copyValue(fromId, toId, true);
-    from.addEventListener('input', handler);
-    from.addEventListener('change', handler);
-    entries.push({fromId, toId, handler});
-  });
-  syncRegistry.set(checkboxId, entries);
-}
-
-function stopSync(checkboxId) {
-  const entries = syncRegistry.get(checkboxId) || [];
-  entries.forEach(({fromId, handler}) => {
-    const from = getEl(fromId);
-    if (from) {
-      from.removeEventListener('input', handler);
-      from.removeEventListener('change', handler);
-    }
-  });
-  syncRegistry.delete(checkboxId);
-}
-
-// ====== setup por bloque (Titular/Suplente -> Padre/Madre) ======
-function setupBlock(options) {
-  const {
-    fromPrefix,                 // 'tit' o 'sup'
-    padreCheckboxId,            // ej. 'tit_es_padre'
-    madreCheckboxId,            // ej. 'tit_es_madre'
-    toPadrePrefix='pad',        // destino padre
-    toMadrePrefix='mad'         // destino madre
-  } = options;
-
-  const chkPadre = getEl(padreCheckboxId);
-  const chkMadre = getEl(madreCheckboxId);
-
-  function onPadreChange() {
-    if (!chkPadre) return;
-    if (chkPadre.checked) {
-      // exclusión mutua
-      if (chkMadre) { chkMadre.checked = false; stopSync(madreCheckboxId); }
-      startSync(padreCheckboxId, makePairs(fromPrefix, toPadrePrefix));
-    } else {
-      stopSync(padreCheckboxId);
+  function getEl(id) { return document.getElementById(id); }
+  function copyValue(fromId, toId, override = false) {
+    const from = getEl(fromId), to = getEl(toId);
+    if (!from || !to) return;
+    if (override || !to.value) {
+      to.value = from.value;
+      to.dispatchEvent(new Event('input', { bubbles: true }));
+      to.dispatchEvent(new Event('change', { bubbles: true }));
     }
   }
 
-  function onMadreChange() {
-    if (!chkMadre) return;
-    if (chkMadre.checked) {
-      if (chkPadre) { chkPadre.checked = false; stopSync(padreCheckboxId); }
-      startSync(madreCheckboxId, makePairs(fromPrefix, toMadrePrefix));
-    } else {
-      stopSync(madreCheckboxId);
-    }
+  // ====== gestor de sincronización (añadir/quitar listeners) ======
+  const syncRegistry = new Map(); // key=checkboxId, value=array de {fromId, toId, handler}
+
+  function startSync(checkboxId, pairs) {
+    // copia inicial
+    pairs.forEach(([fromId, toId]) => copyValue(fromId, toId, true));
+
+    // listeners en vivo
+    const entries = [];
+    pairs.forEach(([fromId, toId]) => {
+      const from = getEl(fromId);
+      if (!from) return;
+      const handler = () => copyValue(fromId, toId, true);
+      from.addEventListener('input', handler);
+      from.addEventListener('change', handler);
+      entries.push({ fromId, toId, handler });
+    });
+    syncRegistry.set(checkboxId, entries);
   }
 
-  if (chkPadre) chkPadre.addEventListener('change', onPadreChange);
-  if (chkMadre) chkMadre.addEventListener('change', onMadreChange);
+  function stopSync(checkboxId) {
+    const entries = syncRegistry.get(checkboxId) || [];
+    entries.forEach(({ fromId, handler }) => {
+      const from = getEl(fromId);
+      if (from) {
+        from.removeEventListener('input', handler);
+        from.removeEventListener('change', handler);
+      }
+    });
+    syncRegistry.delete(checkboxId);
+  }
 
-  // si al cargar ya vienen marcados (re-hidratación)
-  if (chkPadre && chkPadre.checked) onPadreChange();
-  if (chkMadre && chkMadre.checked) onMadreChange();
-}
+  // ====== setup por bloque (Titular/Suplente -> Padre/Madre) ======
+  function setupBlock(options) {
+    const {
+      fromPrefix,                 // 'tit' o 'sup'
+      padreCheckboxId,            // ej. 'tit_es_padre'
+      madreCheckboxId,            // ej. 'tit_es_madre'
+      toPadrePrefix = 'pad',        // destino padre
+      toMadrePrefix = 'mad'         // destino madre
+    } = options;
 
-// ====== inicialización ======
-document.addEventListener('DOMContentLoaded', () => {
-  // TITULAR -> PADRE/MADRE
-  setupBlock({
-    fromPrefix: 'tit',
-    padreCheckboxId: 'tit_es_padre',
-    madreCheckboxId: 'tit_es_madre'
+    const chkPadre = getEl(padreCheckboxId);
+    const chkMadre = getEl(madreCheckboxId);
+
+    function onPadreChange() {
+      if (!chkPadre) return;
+      if (chkPadre.checked) {
+        // exclusión mutua
+        if (chkMadre) { chkMadre.checked = false; stopSync(madreCheckboxId); }
+        startSync(padreCheckboxId, makePairs(fromPrefix, toPadrePrefix));
+      } else {
+        stopSync(padreCheckboxId);
+      }
+    }
+
+    function onMadreChange() {
+      if (!chkMadre) return;
+      if (chkMadre.checked) {
+        if (chkPadre) { chkPadre.checked = false; stopSync(padreCheckboxId); }
+        startSync(madreCheckboxId, makePairs(fromPrefix, toMadrePrefix));
+      } else {
+        stopSync(madreCheckboxId);
+      }
+    }
+
+    if (chkPadre) chkPadre.addEventListener('change', onPadreChange);
+    if (chkMadre) chkMadre.addEventListener('change', onMadreChange);
+
+    // si al cargar ya vienen marcados (re-hidratación)
+    if (chkPadre && chkPadre.checked) onPadreChange();
+    if (chkMadre && chkMadre.checked) onMadreChange();
+  }
+
+  // ====== inicialización ======
+  document.addEventListener('DOMContentLoaded', () => {
+    // TITULAR -> PADRE/MADRE
+    setupBlock({
+      fromPrefix: 'tit',
+      padreCheckboxId: 'tit_es_padre',
+      madreCheckboxId: 'tit_es_madre'
+    });
+
+    // SUPLENTE -> PADRE/MADRE
+    setupBlock({
+      fromPrefix: 'sup',
+      padreCheckboxId: 'sup_es_padre',
+      madreCheckboxId: 'sup_es_madre'
+    });
   });
-
-  // SUPLENTE -> PADRE/MADRE
-  setupBlock({
-    fromPrefix: 'sup',
-    padreCheckboxId: 'sup_es_padre',
-    madreCheckboxId: 'sup_es_madre'
-  });
-});
 </script>
 
 </html>

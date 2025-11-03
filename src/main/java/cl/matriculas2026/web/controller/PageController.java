@@ -59,4 +59,8 @@ public class PageController {
         model.addAttribute("numero", num);
         return "matricula-ok";
     }
+       @GetMapping("")
+    public String panelAdmin() {
+        return "matrcula-form";
+    }
 }

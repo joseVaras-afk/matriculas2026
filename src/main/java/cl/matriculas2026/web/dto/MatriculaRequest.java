@@ -48,6 +48,7 @@ public class MatriculaRequest {
     private String comunaApoderadoSuplente;
     private String nacionalidadApoderadoSuplente;
     private LocalDate fechaNacimientoApoderadoSuplente;
+    private String correoApoderadoSuplente;
 
     // --- Madre (opcional) ---
     private String rutMadre;

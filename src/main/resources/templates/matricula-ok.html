@@ -5,11 +5,16 @@
   <title>Matrícula enviada</title>
 </head>
 <body>
-  <div th:replace="~{layout :: content(~{::#page})}"></div>  
+  <!-- AQUÍ reemplazamos con el fragmento y le PASAMOS el bloque #page -->
+<div th:replace="~{layout :: content(~{::#page})}">
+  <!-- Este bloque #page es el PARÁMETRO que se envía al layout -->
+  <section id="page">
   <div class="success-card">
     <h2>¡Matrícula enviada correctamente!</h2>
     <p>Tu número de matrícula es <strong th:text="${numero}">1</strong>.</p>
     <a th:href="@{/matriculas/form}" class="btn-secondary">Enviar otra</a>
   </div>
+  </section>
+</div>
 </body>
 </html>

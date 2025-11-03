@@ -87,6 +87,7 @@ public class MatriculaServiceImpl implements MatriculaService {
                     .comuna(r.getComunaApoderadoSuplente())
                     .nacionalidad(r.getNacionalidadApoderadoSuplente())
                     .fechaNacimiento(r.getFechaNacimientoApoderadoSuplente())
+                    .correoApoderadoSuplente(r.getCorreoApoderadoSuplente())
                     .build();
             suplente = suplenteRepo.save(suplente);
         }
