@@ -5,6 +5,11 @@ import cl.matriculas2026.repository.*;
 import cl.matriculas2026.service.MatriculaService;
 import cl.matriculas2026.web.dto.MatriculaRequest;
 import jakarta.transaction.Transactional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -159,6 +164,12 @@ public class MatriculaServiceImpl implements MatriculaService {
     public List<Matricula> listarTodas() {
         return matriculaRepo.findAll();
     }
+
+    @Override
+    public Page<Matricula> buscarFiltrado(String curso, String nombre, Pageable pageable) {
+
+    return matriculaRepo.buscarFiltrado(curso, nombre, pageable);
+}
 
     @Override
     @Transactional

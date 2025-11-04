@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Listado de Matrículas</title>
+  <link th:href="@{/css/site.css}" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- Usa el layout y pásale el bloque #page como parámetro -->
+  <div th:replace="~{layout :: content(~{::#page})}">
+    <section id="page">
+      <div class="page-head">
+        <h1>Listado de Matrículas</h1>
+        <p class="lead">Filtra por curso o por nombre de la alumna.</p>
+        <p><a th:href="@{/funcionarios/logout}" class="btn-secondary">Cerrar sesión</a></p>
+        <div th:if="${ok}" class="success-card" th:text="${ok}"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+
+          <!-- Usamos curso/nombre que el controlador vuelve a cargar al modelo -->
+          <form method="get" th:action="@{/funcionarios/matriculas-list}" class="grid-2" id="filtrosForm">
+            <div class="field">
+              <label>Curso</label>
+              <select name="curso" id="cursoSelect">
+                <option value="" th:selected="${#strings.isEmpty(curso)}">Todos</option>
+                <option th:each="c : ${cursos}" th:value="${c}" th:text="${c}" th:selected="${c == curso}">
+                </option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Nombre alumna</label>
+              <input type="text" name="nombre" placeholder="Ej: Ana" th:value="${nombre}">
+            </div>
+
+            <div class="field full" style="display:flex; gap:10px;">
+              <button type="submit" class="btn-primary">Filtrar</button>
+              <a th:href="@{/funcionarios/matriculas-list}" class="btn-secondary">Limpiar</a>
+            </div>
+          </form>
+
+        </div>
+      </div>
+
+      <script>
+        // Opcional: que el select de curso dispare el filtrado al cambiar
+        document.addEventListener('DOMContentLoaded', () => {
+          const sel = document.getElementById('cursoSelect');
+          if (sel) sel.addEventListener('change', () => document.getElementById('filtrosForm').submit());
+        });
+      </script>
+
+      <div class="card">
+        <div class="card-body">
+          <table style="width:100%; border-collapse:collapse;">
+            <thead>
+              <tr>
+                <th style="text-align:left; padding:8px; border-bottom:1px solid #e5e7eb;">#</th>
+                <th style="text-align:left; padding:8px; border-bottom:1px solid #e5e7eb;">Alumno</th>
+                <th style="text-align:left; padding:8px; border-bottom:1px solid #e5e7eb;">Curso</th>
+                <th style="text-align:left; padding:8px; border-bottom:1px solid #e5e7eb;">Apoderado</th>
+                <th style="text-align:left; padding:8px; border-bottom:1px solid #e5e7eb;">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- OJO: sin getters en Thymeleaf -->
+              <tr th:each="m, i : ${matriculas}">
+                <td style="padding:8px;" th:text="${i.index + 1}">1</td>
+                <td style="padding:8px;"
+                  th:text="${m.alumno.nombres + ' ' + m.alumno.apellidoPaterno + ' ' + (m.alumno.apellidoMaterno ?: '')}">
+                  Nombre Alumna
+                </td>
+                <td style="padding:8px;" th:text="${m.alumno.curso}">1°A</td>
+                <td style="padding:8px;"
+                  th:text="${m.apoderadoTitular.nombres + ' ' + m.apoderadoTitular.apellidoPaterno}">
+                  Apoderado
+                </td>
+                <td style="padding:8px;">
+                  <a th:href="@{'/matriculas/ver/' + ${m.numeroMatricula}}" class="btn-secondary">Ver</a>
+                </td>
+              </tr>
+              <tr th:if="${#lists.isEmpty(matriculas)}">
+                <td colspan="5" style="padding:10px;">No hay matrículas para mostrar.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</body>
+
+</html>

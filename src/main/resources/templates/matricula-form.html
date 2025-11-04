@@ -8,7 +8,11 @@
 </head>
 
 <body>
-
+<header>
+        <div>
+            <a class="btn btn-primary" href="/funcionarios/login" role="button">login</a>
+        </div>
+</header>
   <!-- AQUÍ reemplazamos con el fragmento y le PASAMOS el bloque #page -->
   <div th:replace="~{layout :: content(~{::#page})}">
     <!-- Este bloque #page es el PARÁMETRO que se envía al layout -->
@@ -19,6 +23,7 @@
         <p class="lead">Completa los datos en cada sección. Los campos con * son obligatorios.</p>
         <div th:if="${msgError}" class="alert alert-danger" th:text="${msgError}"></div>
       </section>
+
 
       <form th:action="@{/matriculas/form}" th:object="${matricula}" method="post" class="form-card">
 

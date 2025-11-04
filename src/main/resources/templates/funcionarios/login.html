@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Funcionario</title>
+  <link th:href="@{/css/site.css}" rel="stylesheet">
+</head>
+<body>
+  <div class="container" style="max-width:420px; margin-top:60px;">
+    <div class="card">
+      <div class="card-head"><h2>Acceso Funcionarios</h2></div>
+      <div class="card-body">
+        <form th:action="@{/funcionarios/login}" method="post">
+          <div class="field">
+            <label>Correo</label>
+            <input type="email" name="username" required>
+          </div>
+          <div class="field">
+            <label>Contraseña</label>
+            <input type="password" name="password" required>
+          </div>
+          <div class="actions">
+            <button type="submit" class="btn-primary">Ingresar</button>
+          </div>
+          <div th:if="${param.error}" class="alert">Credenciales inválidas</div>
+          <div th:if="${param.logout}" class="alert">Sesión cerrada</div>
+        </form>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
