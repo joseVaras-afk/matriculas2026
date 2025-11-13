@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.time.LocalDate;
 
+import org.apache.poi.hpsf.Date;
+
 @Entity
 @Table(name = "alumno", schema = "matriculas2026")
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
@@ -53,4 +55,53 @@ public class Alumno {
 
     @Column(name = "saludMental_alumno")
     private String saludMental;
+
+    @Column(name = "edad31Marzo_alumno")
+    private Integer edad31Marzo;
+
+    @Column(name = "establecimientoProcedencia_alumno")
+    private String establecimientoProcedencia;
+
+    @Column(name = "asistioEscuelaLenguaje_alumno")
+    private Boolean asistioEscuelaLenguaje; 
+
+    @Column(name = "recibioFono_alumno")
+    private Boolean fono;    
+
+    @Column(name = "pertenecePie_alumno")
+    private Boolean pertenecePie;
+
+    @Column(name = "enfermedad_alumno")
+    private String enfermedad;
+
+    @Column(name = "alergia_alumno")
+    private String alergia;
+
+    @Column(name = "perteneceEtnia_alumno")
+    private Boolean perteneceEtnia;
+
+    @Column(name = "chileSolidario_alumno")
+    private Boolean chileSolidario;
+
+    @Column(name = "programaPuente_alumno")
+    private Boolean programaPuente;
+
+    @Column(name = "tieneFamiliar_alumno")
+    private Boolean tieneFamiliar;
+
+    @Column(name = "retiroNombre_alumno")
+    private String retiroNombre;
+
+    @Column(name = "retiroRut_alumno")
+    private String retiroRut;
+
+    @Column(name = "retiroParentesco_alumno")
+    private String retiroParentesco;
+
+    @Column(name = "usaFurgon_alumno")
+    private Boolean usaFurgon;
+
+    @Column(name = "contactoEmergencia_alumno")
+    private String contactoEmergencia;
+
 }

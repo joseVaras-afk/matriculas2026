@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Consulta de Matrícula</title>
+    <link th:href="@{/css/site.css}" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root { --primary:#0D47A1; --light:#f7f9fc; --danger:#c62828; --ok:#2e7d32; }
+    body { font-family: system-ui, sans-serif; background: var(--light); margin:0; }
+    .wrap { max-width: 520px; margin: 6vh auto; background: #fff; padding: 28px; border-radius:16px; box-shadow: 0 10px 25px rgba(0,0,0,.08); }
+    h1 { font-size: 1.4rem; margin: 0 0 8px; color: #111; }
+    p.sub { color:#555; margin:0 0 18px; }
+    label { display:block; font-weight:600; margin: 16px 0 6px; }
+    input[type="text"]{ width:100%; padding:12px 14px; border:1px solid #e2e8f0; border-radius:10px; font-size:1rem; outline:none; }
+    input[type="text"]:focus { border-color: var(--primary); box-shadow:0 0 0 3px rgba(13,71,161,.12); }
+    .actions { margin-top: 16px; display:flex; gap:12px; }
+    button{ appearance:none; border:0; border-radius:10px; padding:12px 16px; font-weight:700; cursor:pointer; }
+    .btn-primary{ background: var(--primary); color:#fff; }
+    .alert{ padding:12px 14px; border-radius:10px; margin:10px 0 0; font-size:.95rem; }
+    .alert.info { background:#E3F2FD; color:#0D47A1; }
+    .alert.error{ background:#FFEBEE; color: var(--danger); }
+    .alert.success{ background:#E8F5E9; color: var(--ok); }
+    .foot{ margin-top: 18px; color:#666; font-size:.9rem; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Inicio Proceso de Matricula 2026</h1>
+  <p class="sub">Para iniciar ingrese el <strong>RUT de la alumna</strong></p>
+
+  <div th:if="${mensaje}" th:class="'alert ' + (${tipo} ?: 'info')">
+    <span th:text="${mensaje}">Mensaje aquí</span>
+  </div>
+
+  <form th:action="@{/inicio}" method="post" autocomplete="off" id="formRut">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+    <label for="rutAlumna">RUT de la alumna</label>
+    <input type="text" id="rutAlumna" class="rut-input" required>
+
+    <div class="actions">
+      <button type="submit" class="btn-primary">Continuar</button>
+    </div>
+  </form>
+
+  <div class="foot">Ejemplo válido: 12345678-K</div>
+</div>
+
+<script>
+// Formato simple de RUT en el front (opcional)
+// NO reemplaza la validación del backend.
+(function () {
+    function cleanRut(value) {
+      return (value || '')
+        .replace(/[^0-9kK]/g, '')      // solo dígitos o K
+        .toUpperCase();
+    }
+
+    function formatRutWithDash(value) {
+      const v = cleanRut(value);
+      if (v.length <= 1) return v;     // 0 o 1 char: sin guion
+      return v.slice(0, -1) + '-' + v.slice(-1);
+    }
+
+    function onRutInput(e) {
+      const el = e.target;
+      const old = el.value;
+      const formatted = formatRutWithDash(old);
+      if (old !== formatted) {
+        const end = formatted.length;  // caret al final (simple y efectivo)
+        el.value = formatted;
+        try { el.setSelectionRange(end, end); } catch (_) { }
+      }
+    }
+
+    function attachRutMask() {
+      document.querySelectorAll('input.rut-input').forEach(el => {
+        // Opcional: sugerir teclado numérico en móviles
+        el.setAttribute('inputmode', 'text');
+        el.setAttribute('autocomplete', 'off');
+        el.addEventListener('input', onRutInput);
+        el.addEventListener('blur', onRutInput);   // asegura formato final
+        // Si viene precargado desde el servidor, formatea al cargar
+        el.value = formatRutWithDash(el.value);
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', attachRutMask);
+    } else {
+      attachRutMask();
+    }
+  })();
+</script>
+</body>
+</html>

@@ -40,4 +40,7 @@ public class Matricula {
 
     @Column(name = "estado_matricula")
     private String estadoMatricula;
+
+    @Column(name = "rut_alumno")
+    private String rutAlumno;
 }

@@ -138,3 +138,109 @@ html,body{ margin:0; padding:0; font-family: Inter, system-ui, -apple-system, Se
   color: var(--muted);
   font-weight: 500;
 }
+
+/* --- Layout base del formulario --- */
+.form-card { max-width: 1100px; margin: 0 auto; }
+.card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,.05); margin: 18px 0; }
+.card-head { padding: 16px 18px; border-bottom: 1px solid #eef2f7; }
+.card-head h2 { margin: 0; font-size: 1.15rem; }
+.card-body { padding: 18px; }
+
+.grid-2 { 
+  display: grid; 
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 18px;
+}
+@media (max-width: 860px){
+  .grid-2 { grid-template-columns: 1fr; }
+}
+
+/* Haz que los campos “full” ocupen todo el ancho de la tarjeta */
+.field.full { grid-column: 1 / -1; }
+
+/* --- Cada campo --- */
+.field { 
+  display: grid;
+  grid-template-columns: 1fr; 
+  align-items: start; 
+  gap: 6px;
+}
+.field label { 
+  font-weight: 600; 
+  color: #111827; 
+  font-size: .92rem;
+}
+
+/* Inputs y selects consistentes */
+.field input[type="text"],
+.field input[type="email"],
+.field input[type="date"],
+.field input[type="number"],
+.field select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  outline: none;
+  min-height: 40px;
+  font-size: .95rem;
+}
+.field input:focus,
+.field select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+}
+
+/* Apariencia de select (opcional, limpia la UI) */
+.form-select { appearance: none; background-color: #fff; }
+.form-select::-ms-expand { display: none; }
+
+/* --- Campos con prefijo +569 (sin cambiar HTML) ---
+   Usa :has() para cambiar a diseño de 2 columnas solo si hay .prefix */
+.field:has(.prefix) { 
+  grid-template-columns: auto 1fr; 
+  align-items: center;
+}
+.field:has(.prefix) label { grid-column: 1 / -1; } /* etiqueta arriba de ambas columnas */
+.field .prefix {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 10px;
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-right: 0;
+  border-radius: 8px 0 0 8px;
+  color: #374151;
+  font-weight: 600;
+}
+.field .prefix + input {
+  border-radius: 0 8px 8px 0;
+  margin-left: 0; /* asegura continuidad visual */
+}
+
+/* Checkboxes en línea bonitos */
+.checks-inline { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
+.checks-inline .check { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
+.checks-inline small { color: #6b7280; font-weight: 400; }
+
+/* Botones */
+.btn-primary, .btn-secondary {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+.btn-primary { background: #2563eb; color: #fff; }
+.btn-primary:hover { background: #1d4ed8; }
+.btn-secondary { background: #f3f4f6; color: #111827; border-color: #e5e7eb; }
+.btn-secondary:hover { background: #e5e7eb; }
+
+/* Encabezado de página */
+.page-head { margin-bottom: 10px; }
+.page-head .lead { color: #6b7280; margin: 6px 0 0; }
+

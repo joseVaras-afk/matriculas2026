@@ -1,40 +1,43 @@
-package cl.matriculas2026.web.dto;
 
-import jakarta.validation.constraints.*;
-import lombok.*;
+package cl.matriculas2026.service.dto;
+
 import java.time.LocalDate;
 
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class MatriculaRequest {
+import org.apache.poi.hpsf.Date;
 
-    // --- Alumno ---
-    @NotBlank private String rutAlumno;
-    @NotBlank private String nombresAlumno;
-    @NotBlank private String apellidoPaternoAlumno;
-    @NotBlank private String apellidoMaternoAlumno;
-    @NotBlank private String cursoAlumno;
-    @NotNull  private LocalDate fechaNacimientoAlumno;
-    @NotBlank private String nacionalidadAlumno;
-    @NotBlank private String direccionAlumno;
-    @NotBlank private String comunaAlumno;
+import lombok.Data;
+
+@Data
+public class FichaMatriculaDTO {
+    // encabezado
+    private String fechaMatricula;
+    private String curso;
+    private String numeroMatricula;
+
+    private String rutAlumno;
+    private String nombresAlumno;
+    private String apellidoPaternoAlumno;
+    private String apellidoMaternoAlumno;
+    private String cursoAlumno;
+    private LocalDate fechaNacimientoAlumno;
+    private String nacionalidadAlumno;
+    private String direccionAlumno;
+    private String comunaAlumno;
     private Integer edadAlumno;
-    private String  viveConAlumno;
-    private String  cesfamAlumno;
-    private String  saludMentalAlumno;
+    private String viveConAlumno;
+    private String cesfamAlumno;
+    private String saludMentalAlumno;
     private Integer edad31Marzo;
-    private String  establecimientoProcedencia;
-
-    // checkboxes → boolean
+    private String establecimientoProcedencia;
     private boolean asistioEscuelaLenguaje;
-    private boolean fono;              // <-- antes Boolean
-    private boolean perteneceEtnia;    // <-- antes String
+    private boolean fono;
     private boolean pertenecePie;
-    private boolean chileSolidario;
-
-    // campos de texto
     private String enfermedad;
-    private String alergia;
-    private String etnia;              // selección del <select>
+    private String alergiaMedicamentos;
+    private boolean perteneceEtnia;
+    private boolean chileSolidario;
+    private boolean programaPuente;
+    private boolean tieneFamiliarEnEscuela;
 
     // --- Retiro ---
     private String retiroNombre;
@@ -43,12 +46,12 @@ public class MatriculaRequest {
     private boolean usaFurgon;
 
     // --- Apoderado Titular ---
-    @NotBlank private String rutApoderadoTitular;
-    @NotBlank private String nombresApoderadoTitular;
-    @NotBlank private String apellidoPaternoApoderadoTitular;
-    @NotBlank private String apellidoMaternoApoderadoTitular;
-    @NotBlank private String parentescoApoderadoTitular;
-    @Email @NotBlank private String correoApoderadoTitular;
+    private String rutApoderadoTitular;
+    private String nombresApoderadoTitular;
+    private String apellidoPaternoApoderadoTitular;
+    private String apellidoMaternoApoderadoTitular;
+    private String parentescoApoderadoTitular;
+    private String correoApoderadoTitular;
     private String telefono1ApoderadoTitular;
     private String telefono2ApoderadoTitular;
     private String direccionApoderadoTitular;
@@ -56,7 +59,7 @@ public class MatriculaRequest {
     private String nacionalidadApoderadoTitular;
     private LocalDate fechaNacimientoApoderadoTitular;
 
-    // --- Suplente ---
+    // --- Apoderado Suplente (opcional) ---
     private String rutApoderadoSuplente;
     private String nombresApoderadoSuplente;
     private String apellidoPaternoApoderadoSuplente;
@@ -70,7 +73,7 @@ public class MatriculaRequest {
     private LocalDate fechaNacimientoApoderadoSuplente;
     private String correoApoderadoSuplente;
 
-    // --- Madre ---
+    // --- Madre (opcional) ---
     private String rutMadre;
     private String nombresMadre;
     private String apellidoPaternoMadre;
@@ -85,7 +88,7 @@ public class MatriculaRequest {
     private String nivelEducacionMadre;
     private String ocupacionMadre;
 
-    // --- Padre ---
+    // --- Padre (opcional) ---
     private String rutPadre;
     private String nombresPadre;
     private String apellidoPaternoPadre;
@@ -99,4 +102,6 @@ public class MatriculaRequest {
     private String correoPadre;
     private String nivelEducacionPadre;
     private String ocupacionPadre;
+
+    // otros campos pueden ir aquí
 }

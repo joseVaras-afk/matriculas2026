@@ -60,7 +60,7 @@ public class SecurityConfig {
             )
             .logout(logout -> logout
                 .logoutUrl("/funcionarios/logout")
-                .logoutSuccessUrl("/funcionarios/login?logout")
+                .logoutSuccessUrl("/funcionarios/login")
                 .permitAll()
             )
             .csrf(Customizer.withDefaults());

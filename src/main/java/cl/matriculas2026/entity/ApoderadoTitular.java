@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.time.LocalDate;
 
+import org.apache.poi.hpsf.Date;
+
 @Entity
 @Table(name = "apoderado_titular", schema = "matriculas2026")
 @Data @NoArgsConstructor @AllArgsConstructor @Builder

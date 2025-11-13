@@ -11,7 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
+import org.apache.poi.hpsf.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -57,6 +57,19 @@ public class MatriculaServiceImpl implements MatriculaService {
                 .viveCon(r.getViveConAlumno())
                 .cesfam(r.getCesfamAlumno())
                 .saludMental(r.getSaludMentalAlumno())
+                .edad31Marzo(r.getEdad31Marzo())
+                .retiroNombre(r.getRetiroNombre())
+                .retiroRut(r.getRetiroRut())
+                .retiroParentesco(r.getRetiroParentesco())
+                .usaFurgon(r.isUsaFurgon())
+                .establecimientoProcedencia(r.getEstablecimientoProcedencia())
+                .asistioEscuelaLenguaje(r.isAsistioEscuelaLenguaje())
+                .enfermedad(r.getEnfermedad())
+                .fono(r.isFono())                 // antes r.getFono()
+                .perteneceEtnia(r.isPerteneceEtnia())  // antes r.getPerteneceEtnia()
+.pertenecePie(r.isPertenecePie())
+.alergia(r.getAlergia())
+.chileSolidario(r.isChileSolidario())
                 .build();
         alumno = alumnoRepo.save(alumno);
 

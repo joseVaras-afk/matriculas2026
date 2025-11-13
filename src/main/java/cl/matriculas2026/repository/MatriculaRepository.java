@@ -3,6 +3,7 @@ package cl.matriculas2026.repository;
 import cl.matriculas2026.entity.Matricula;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
@@ -22,4 +23,5 @@ public interface MatriculaRepository extends JpaRepository<Matricula, Integer> {
     Page<Matricula> buscarFiltrado(@Param("curso") String curso,
                                   @Param("nombre") String nombre,
                                   Pageable pageable);
+    Optional<Matricula> findByRutAlumno(String rutAlumno);
 }

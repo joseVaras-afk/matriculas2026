@@ -15,7 +15,10 @@
       <div class="page-head">
         <h1>Listado de Matrículas</h1>
         <p class="lead">Filtra por curso o por nombre de la alumna.</p>
-        <p><a th:href="@{/funcionarios/logout}" class="btn-secondary">Cerrar sesión</a></p>
+        <form th:action="@{/logout}" method="post" class="d-inline">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                    <button type="submit" class="btn btn-link p-0 m-0 align-baseline">Cerrar sesión</button> 
+            </form>
         <div th:if="${ok}" class="success-card" th:text="${ok}"></div>
       </div>
 
@@ -81,7 +84,8 @@
                   Apoderado
                 </td>
                 <td style="padding:8px;">
-                  <a th:href="@{'/matriculas/ver/' + ${m.numeroMatricula}}" class="btn-secondary">Ver</a>
+                  <a th:href="@{'/funcionarios/matriculas/' + ${m.numeroMatricula} + '/ficha'}" class="btn-primary" style="margin-left:6px;">
+                    Generar Ficha</a>
                 </td>
               </tr>
               <tr th:if="${#lists.isEmpty(matriculas)}">

@@ -1,6 +1,7 @@
 package cl.matriculas2026.controller;
 
 import cl.matriculas2026.entity.Matricula;
+import cl.matriculas2026.service.FichaMatriculaService;
 import cl.matriculas2026.service.MatriculaService;
 import cl.matriculas2026.repository.MatriculaRepository;
 
@@ -8,6 +9,7 @@ import java.util.List;
 
 import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +21,14 @@ public class FuncionarioMatriculaController {
 
     private final MatriculaService matriculaService;
     private final MatriculaRepository matriculaRepository;
+    private final FichaMatriculaService fichaMatriculaService;
 
     public FuncionarioMatriculaController(MatriculaService matriculaService,
-                                         MatriculaRepository matriculaRepository) {
+                                         MatriculaRepository matriculaRepository,
+                                         FichaMatriculaService fichaMatriculaService) {
         this.matriculaService = matriculaService;
         this.matriculaRepository = matriculaRepository;
-
+        this.fichaMatriculaService = fichaMatriculaService;
     }
 
 
@@ -62,5 +66,23 @@ public String listaMatriculas(
     model.addAttribute("page", pageResult); // por si paginas en la vista
 
     return "funcionarios/matriculas-list";
+}
+
+@GetMapping("/matriculas/{id}/ficha")
+public ResponseEntity<byte[]> generarFicha(@PathVariable("id") int id) {
+    Matricula m = matriculaService.obtenerPorNumero(id);
+
+    byte[] bytes = fichaMatriculaService.generarFichaDocx(m);
+
+    String fileName = String.format("Ficha_%s_%s_%s_%s.docx",
+            m.getAlumno().getCurso(),
+            m.getNumeroMatricula(),
+            m.getAlumno().getNombres().replaceAll(" ", "_"),
+            m.getAlumno().getApellidoPaterno().replaceAll(" ", "_"));
+
+    return ResponseEntity.ok()
+            .header("Content-Disposition", "attachment; filename=\"" + fileName + "\"")
+            .header("Content-Type", "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+            .body(bytes);
 }
 }
