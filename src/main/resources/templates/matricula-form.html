@@ -8,19 +8,30 @@
 </head>
 
 <body>
+  <header class="header-custom d-flex justify-content-between align-items-center p-3">
+    <!-- Logo izquierda -->
+    <div class="header-logo-left">
+      <img th:src="@{/img/logo-escuela.png}" alt="Logo Escuela" width="170">
+    </div>
 
-  <header>
-    <div>
-      <a class="btn btn-primary" href="/funcionarios/login" role="button">login</a>
+    <!-- Título central -->
+    <div class="text-center flex-grow-1">
+      <h1 class="school-title mb-0">Escuela Superior de Niñas Arturo Alessandri Palma</h1>
+    </div>
+
+    <!-- Logo derecha -->
+    <div class="header-logo-right">
+      <img th:src="@{/img/slep.png}" alt="Logo SLEP" width="170">
     </div>
   </header>
+
 
   <div th:replace="~{layout :: content(~{::#page})}">
     <section id="page">
 
       <section class="page-head">
-        <h1>Formulario de Matrícula 2026</h1>
-        <p class="lead">Completa los datos en cada sección. Los campos con * son obligatorios.</p>
+        <h1>Formulario de Pre-Matrícula 2026</h1>
+        <p class="lead">Sr. apoderado complete todos los campos con la informacion actualizada, los datos con * son obligatorios </p>
         <div th:if="${msgError}" class="alert alert-danger" th:text="${msgError}"></div>
       </section>
 
@@ -35,7 +46,8 @@
           <div class="card-body grid-2">
             <div class="field">
               <label>RUT *</label>
-              <input type="text" th:field="*{rutAlumno}" class="rut-input" required>
+              <input type="text" id="rutAlumno" name="rutAlumno" th:value="${param.rutAlumno}" />
+
             </div>
             <div class="field">
               <label>Nombres *</label>
@@ -50,7 +62,7 @@
               <input type="text" th:field="*{apellidoMaternoAlumno}" required>
             </div>
             <div class="field">
-              <label>Curso *</label>
+              <label>Curso Actual 2025 *</label>
               <select class="form-select" th:field="*{cursoAlumno}" required>
                 <option value="">Seleccione un curso</option>
                 <option value="PRE-KINDER A">PRE-KINDER A</option>
@@ -103,14 +115,6 @@
                 <option value="ECUADOR">ECUADOR</option>
                 <option value="OTRA">OTRA</option>
               </select>
-            </div>
-            <div class="field">
-              <label>Edad (actual)</label>
-              <input type="number" min="0" th:field="*{edadAlumno}">
-            </div>
-            <div class="field">
-              <label>Edad al 31 de marzo</label>
-              <input type="number" min="0" th:field="*{edad31Marzo}">
             </div>
             <div class="field">
               <label>Dirección *</label><span>(nombre de la calle y número)</span>
@@ -186,24 +190,9 @@
               </select>
             </div>
             <div class="field">
-              <label>CESFAM</label><span>(nombre del CESFAM)</span>
-              <input type="text" th:field="*{cesfamAlumno}">
-            </div>
-            <div class="field full">
-              <label>¿Recibe atención de salud mental? ¿Dónde?</label>
-              <input type="text" th:field="*{saludMentalAlumno}">
-            </div>
-
-            <div class="field full">
-              <label>Establecimiento de Procedencia</label>
-              <input type="text" th:field="*{establecimientoProcedencia}">
-            </div>
-
-            <div class="field full">
-              <label class="check">
-                <input type="checkbox" th:field="*{asistioEscuelaLenguaje}">
-                Asistió a escuela de lenguaje
-              </label>
+              <label>¿La alumna presenta alguna necesidad educativa especial?</label>
+              <input type="text" th:field="*{necesidadesEspeciales}">
+              <p>Si la alumna presenta alguna necesidad educativa especial debe presentar la documentacion en el establecimiento el dia de la matricula</p>
             </div>
           </div>
         </div>
@@ -223,8 +212,16 @@
               <input type="text" th:field="*{retiroRut}" class="rut-input">
             </div>
             <div class="field">
-              <label>Parentesco</label>
-              <input type="text" th:field="*{retiroParentesco}">
+              <label>Parentesco *</label>
+              <select th:field="*{retiroParentesco}" id="ret_parentesco" required>
+                <option value="">Seleccione...</option>
+                <option value="PADRE">PADRE</option>
+                <option value="MADRE">MADRE</option>
+                <option value="ABUELO/A">ABUELO/A</option>
+                <option value="TIO/A">TIO/A</option>
+                <option value="TUTOR">TUTOR</option>
+                <option value="OTRO">OTRO</option>
+              </select>
             </div>
             <div class="field full">
               <label class="check">
@@ -362,7 +359,7 @@
         <!-- =================== APODERADO SUPLENTE =================== -->
         <div class="card">
           <div class="card-head">
-            <h2>Apoderado Suplente (opcional)</h2>
+            <h2>Apoderado 2</h2>
           </div>
           <div class="card-body grid-2" id="suplente-section">
             <div class="field"><label>RUT</label><input type="text" th:field="*{rutApoderadoSuplente}" class="rut-input"
@@ -574,38 +571,13 @@
             <div class="field"><label>Teléfono 2</label><span class="prefix">+569</span><input type="text"
                 th:field="*{telefono2Madre}" id="mad_tel2"></div>
             <div class="field"><label>Correo</label><input type="email" th:field="*{correoMadre}" id="mad_correo"></div>
-            <div class="field"><label>Nivel Educación</label>
-              <select class="form-select" th:field="*{nivelEducacionMadre}">
-                <option value="">Seleccione su nivel educacional</option>
-                <option value="Basica Incompleta">Básica Incompleta</option>
-                <option value="Basica Completa">Básica Completa</option>
-                <option value="Media Incompleta">Media Incompleta</option>
-                <option value="Media Completa">Media Completa</option>
-                <option value="Tecnico Nivel Medio">Técnico Nivel Medio</option>
-                <option value="Tecnico Nivel Superior">Técnico Nivel Superior</option>
-                <option value="Universitaria Incompleta">Universitaria Incompleta</option>
-                <option value="Universitaria Completa">Universitaria Completa</option>
-                <option value="Postgrado">Postgrado</option>
-              </select>
-            </div>
-            <div class="field"><label>Ocupación</label>
-              <select class="form-select" th:field="*{ocupacionMadre} ">
-                <option value="">Seleccione su ocupación</option>
-                <option value="desempleado">desempleado</option>
-                <option value="empleado sector privado">empleado sector privado</option>
-                <option value="empleado sector público">empleado sector público</option>
-                <option value="trabajador independiente">trabajador independiente</option>
-                <option value="dueña de casa">dueña de casa</option>
-                <option value="jubilado/pensionado">jubilado/pensionado</option>
-              </select>
-            </div>
           </div>
         </div>
 
-        <!-- =================== PADRE (opcional) =================== -->
+        <!-- =================== PADRE =================== -->
         <div class="card">
           <div class="card-head">
-            <h2>Datos del Padre (opcional)</h2>
+            <h2>Datos del Padre </h2>
           </div>
           <div class="card-body grid-2" id="padre-section">
             <div class="field"><label>RUT</label><input type="text" th:field="*{rutPadre}" id="pad_rut"
@@ -697,117 +669,88 @@
             <div class="field"><label>Teléfono 2</label><span class="prefix">+569</span><input type="text"
                 th:field="*{telefono2Padre}" id="pad_tel2"></div>
             <div class="field"><label>Correo</label><input type="email" th:field="*{correoPadre}" id="pad_correo"></div>
-            <div class="field"><label>Nivel Educación</label>
-              <select class="form-select" th:field="*{nivelEducacionPadre}">
-                <option value="" disabled selected>Seleccione su nivel educacional</option>
-                <option value="Basica Incompleta">Básica Incompleta</option>
-                <option value="Basica Completa">Básica Completa</option>
-                <option value="Media Incompleta">Media Incompleta</option>
-                <option value="Media Completa">Media Completa</option>
-                <option value="Tecnico Nivel Medio">Técnico Nivel Medio</option>
-                <option value="Tecnico Nivel Superior">Técnico Nivel Superior</option>
-                <option value="Universitaria Incompleta">Universitaria Incompleta</option>
-                <option value="Universitaria Completa">Universitaria Completa</option>
-                <option value="Postgrado">Postgrado</option>
-              </select>
-            </div>
-            <div class="field"><label>Ocupación</label>
-              <select class="form-select" th:field="*{ocupacionPadre}">
-                <option value="" disabled selected>Seleccione su ocupación</option>
-                <option value="desempleado">desempleado</option>
-                <option value="empleado sector privado">empleado sector privado</option>
-                <option value="empleado sector público">empleado sector público</option>
-                <option value="trabajador independiente">trabajador independiente</option>
-                <option value="dueña de casa">dueña de casa</option>
-                <option value="jubilado/pensionado">jubilado/pensionado</option>
-              </select>
-            </div>
+           
           </div>
         </div>
 
+        <!-- =================== AUTORIZACIONES =================== -->
+<div class="card">
+  <div class="card-head">
+    <h2>Autorizaciones</h2>
+  </div>
 
-        <!--=========================otros datos===================-->
+  <div class="card-body">
+    <!-- 1) Huella para control de atrasos -->
+    <div class="field">
+      <p class="note">Autorizo el registro de huella digital de mi hija para el monitoreo de atrasos.</p>
+      <label class="check">
+        <input type="checkbox" th:field="*{autorizaAtraso}" id="autorizaAtraso"> De acuerdo
+      </label>
+    </div>
 
-        <div class="card">
-          <div class="card-head">
-            <h2>Otros datos</h2>
-          </div>
-          <div class="card-body grid-2">
+    <hr class="sep">
 
-            <!-- CESFAM (si prefieres, puedes quitar el de la sección Alumno) -->
-            <div class="field">
-              <label>CESFAM</label><span>(nombre del CESFAM)</span>
-              <input type="text" th:field="*{cesfamAlumno}">
-            </div>
-
-            <!-- Asistió escuela de lenguaje -->
-            <div class="field full">
-              <label class="check">
-                <input type="checkbox" th:field="*{asistioEscuelaLenguaje}">
-                Asistió a escuela de lenguaje
-              </label>
-            </div>
-
-            <!-- Fonoaudiología -->
-            <div class="field full">
-              <label class="check">
-                <input type="checkbox" th:field="*{fono}">
-                ¿Recibe/recibió Fonoaudiología?
-              </label>
-            </div>
-
-            <!-- PIE / Integración -->
-            <div class="field full">
-              <label class="check">
-                <input type="checkbox" th:field="*{pertenecePie}">
-                ¿PIE / Integración?
-              </label>
-            </div>
-
-            <!-- Enfermedad -->
-            <div class="field">
-              <label>Enfermedad</label>
-              <input rows="2" th:field="*{enfermedad}" placeholder="Describa si corresponde"></input>
-            </div>
-
-            <!-- Alergia a medicamentos -->
-            <div class="field">
-              <label>Alergia a medicamentos</label>
-              <input rows="2" th:field="*{alergia}" placeholder="Describa si corresponde"></input>
-            </div>
-
-            <!-- Pertenece a pueblo originario + Select etnia (se muestra al marcar) -->
-            <div class="field full">
-              <label class="check">
-                <input type="checkbox" id="chkEtnia" th:field="*{perteneceEtnia}">
-                ¿Pertenece a pueblo originario?
-              </label>
-            </div>
-
-            <div class="field">
-              <label for="etnias">Etnia</label>
-              <select name="etnias" id="etnias" th:field="*{etnia}" class="hidden" disabled>
-                <option value="" disabled selected>Seleccione una etnia</option>
-                <option value="Mapuche">Mapuche</option>
-                <option value="Aymara">Aymara</option>
-                <option value="Rapa Nui">Rapa Nui</option>
-                <option value="Quechua">Quechua</option>
-                <option value="Colla">Colla</option>
-                <option value="Kawesqar">Kawesqar</option>
-                <option value="Otro">Otro</option>
-              </select>
-            </div>
-
-            <!-- Chile Solidario -->
-            <div class="field full">
-              <label class="check">
-                <input type="checkbox" th:field="*{chileSolidario}">
-                ¿Chile Solidario?
-              </label>
-            </div>
-
+    <!-- 2) RICE -->
+    <div class="field">
+      <label class="label-strong">RICE (Reglamento Interno de Convivencia Escolar)</label>
+      <div class="rice-row">
+        <img th:src="@{/img/qr1.png}" alt="QR RICE" width="140" height="140">
+        <div class="rice-info">
+          <a th:href="@{/docs/rice.pdf}" target="_blank" rel="noopener">Pincha aquí para ver el documento</a>
+          <div class="mt-8">
+            <label class="check">
+              <input type="checkbox" th:field="*{aceptaRice}" id="aceptaRice" required> He leído y acepto el RICE
+            </label>
           </div>
         </div>
+      </div>
+    </div>
+
+    <hr class="sep">
+
+    <!-- 3) Clases de Religión -->
+    <div class="field">
+      <label class="label-strong">Encuesta Clases de Religión</label>
+      <p class="note">Indique si autoriza la participación de su hija en clases de religión.</p>
+
+      <!-- Mantengo tus IDs: rel_si, rel_no -->
+      <div class="checks-inline">
+        <label class="check">
+          <input type="checkbox" id="rel_si"> Acepto
+        </label>
+        <label class="check">
+          <input type="checkbox" id="rel_no"> Rechazo
+        </label>
+      </div>
+
+      <!-- Campo real que se enviará al backend: true/false -->
+      <input type="hidden" th:field="*{religionAcepta}" id="religionAceptaHidden">
+
+      <!-- Alternativas visibles solo si se marca RECHAZO -->
+      <div id="alternativasReligion" class="alt-box hidden" aria-hidden="true">
+        <p class="note">Seleccione una o más alternativas de actividad:</p>
+        <div class="checks-grid">
+          <label class="check">
+            <input type="checkbox" th:field="*{actividadesAlternativas}" value="ARTISTICO" class="alt-opt">
+            Taller artístico
+          </label>
+          <label class="check">
+            <input type="checkbox" th:field="*{actividadesAlternativas}" value="DEPORTIVO" class="alt-opt">
+            Taller deportivo
+          </label>
+          <label class="check">
+            <input type="checkbox" th:field="*{actividadesAlternativas}" value="REFORZAMIENTO" class="alt-opt">
+            Clases de reforzamiento
+          </label>
+        </div>
+        <small class="hint">Debes elegir al menos una alternativa si rechazas las clases de religión.</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
         <!-- =================== ACCIONES =================== -->
         <div class="actions">
           <button type="submit" class="btn-primary">Enviar Matrícula</button>
@@ -818,8 +761,91 @@
 
     </section>
   </div>
-
+    <footer>
+      <p>Para hacer valida la matricula debe asistir a la escuela en la fecha que corresponda a su curso para firmar la ficha de matricula </p>
+    </footer>
 </body>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const chkSi = document.getElementById('rel_si');
+    const chkNo = document.getElementById('rel_no');
+    const altBox = document.getElementById('alternativasReligion');
+    const hiddenAccept = document.getElementById('religionAceptaHidden');
+    const altOptions = Array.from(document.querySelectorAll('.alt-opt'));
+
+    function setHidden(val) {
+      // true / false como texto para que Thymeleaf lo recoja en Boolean
+      hiddenAccept.value = String(val);
+    }
+
+    function toggleAlternativas(show) {
+      if (show) {
+        altBox.classList.remove('hidden');
+        altBox.setAttribute('aria-hidden', 'false');
+      } else {
+        altBox.classList.add('hidden');
+        altBox.setAttribute('aria-hidden', 'true');
+        // desmarcar alternativas si se vuelve a "acepta"
+        altOptions.forEach(opt => opt.checked = false);
+      }
+    }
+
+    function onRelSi() {
+      if (chkSi.checked) {
+        // Exclusión mutua
+        chkNo.checked = false;
+        setHidden(true);            // acepta religión
+        toggleAlternativas(false);  // ocultar alternativas
+      } else {
+        // si desmarcan "acepto" sin marcar "rechazo", no definimos (lo valida el submit)
+        if (!chkNo.checked) hiddenAccept.value = '';
+      }
+    }
+
+    function onRelNo() {
+      if (chkNo.checked) {
+        chkSi.checked = false;
+        setHidden(false);           // no acepta religión
+        toggleAlternativas(true);   // mostrar alternativas
+      } else {
+        // si desmarcan "rechazo" sin marcar "acepto", no definimos
+        if (!chkSi.checked) hiddenAccept.value = '';
+        toggleAlternativas(false);
+      }
+    }
+
+    chkSi.addEventListener('change', onRelSi);
+    chkNo.addEventListener('change', onRelNo);
+
+    // Estado inicial (por si vuelves del servidor con datos)
+    onRelSi();
+    onRelNo();
+
+    // Validación en submit: si rechaza, al menos una alternativa
+    const form = document.querySelector('form.form-card');
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        // Debe elegir al menos una de las dos opciones (acepta/rechaza)
+        const hasChoice = chkSi.checked || chkNo.checked;
+        if (!hasChoice) {
+          e.preventDefault();
+          alert('Debes indicar si aceptas o rechazas las clases de religión.');
+          return;
+        }
+
+        if (chkNo.checked) {
+          const anyAlt = altOptions.some(opt => opt.checked);
+          if (!anyAlt) {
+            e.preventDefault();
+            alert('Si rechazas religión, debes seleccionar al menos una actividad alternativa.');
+            return;
+          }
+        }
+      });
+    }
+  });
+</script>
+
 <script>
   // ====== utilidades de mapeo ======
   function makePairs(fromPrefix, toPrefix) {

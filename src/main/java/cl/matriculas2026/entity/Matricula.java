@@ -5,10 +5,30 @@ import lombok.*;
 
 import java.time.LocalDate;
 
+import cl.matriculas2026.util.RutUtils;
+
 @Entity
 @Table(name = "matricula", schema = "matriculas2026")
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+
 public class Matricula {
+
+    @PrePersist
+    public void prePersist() {
+        if (this.rutAlumno != null) {
+            this.rutAlumno = RutUtils.normalize(this.rutAlumno);
+        }
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        if (this.rutAlumno != null) {
+            this.rutAlumno = RutUtils.normalize(this.rutAlumno);
+        }
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

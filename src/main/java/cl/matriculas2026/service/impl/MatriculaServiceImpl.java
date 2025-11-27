@@ -51,7 +51,6 @@ public class MatriculaServiceImpl implements MatriculaService {
                 .curso(r.getCursoAlumno())
                 .fechaNacimiento(r.getFechaNacimientoAlumno())
                 .nacionalidad(r.getNacionalidadAlumno())
-                .edad(r.getEdadAlumno())
                 .direccion(r.getDireccionAlumno())
                 .comuna(r.getComunaAlumno())
                 .viveCon(r.getViveConAlumno())
@@ -70,6 +69,7 @@ public class MatriculaServiceImpl implements MatriculaService {
 .pertenecePie(r.isPertenecePie())
 .alergia(r.getAlergia())
 .chileSolidario(r.isChileSolidario())
+.necesidadespeciales(r.getNecesidadesEspeciales())
                 .build();
         alumno = alumnoRepo.save(alumno);
 

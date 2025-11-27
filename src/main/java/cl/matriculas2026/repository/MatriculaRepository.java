@@ -23,5 +23,10 @@ public interface MatriculaRepository extends JpaRepository<Matricula, Integer> {
     Page<Matricula> buscarFiltrado(@Param("curso") String curso,
                                   @Param("nombre") String nombre,
                                   Pageable pageable);
-    Optional<Matricula> findByRutAlumno(String rutAlumno);
+    @Query(value = """
+  SELECT CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END
+  FROM matricula
+  WHERE UPPER(REGEXP_REPLACE(rut_alumno, '[^0-9K]', '')) = :rutNorm
+  """, nativeQuery = true)
+int existsByRutAlumnoNormalized(@Param("rutNorm") String rutNorm);
 }

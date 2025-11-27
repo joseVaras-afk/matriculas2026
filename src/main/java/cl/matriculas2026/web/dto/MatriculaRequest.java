@@ -3,6 +3,7 @@ package cl.matriculas2026.web.dto;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class MatriculaRequest {
@@ -17,12 +18,16 @@ public class MatriculaRequest {
     @NotBlank private String nacionalidadAlumno;
     @NotBlank private String direccionAlumno;
     @NotBlank private String comunaAlumno;
-    private Integer edadAlumno;
     private String  viveConAlumno;
     private String  cesfamAlumno;
     private String  saludMentalAlumno;
     private Integer edad31Marzo;
     private String  establecimientoProcedencia;
+    private String necesidadesEspeciales;
+    private Boolean autorizaAtraso;
+private Boolean aceptaRice;
+private Boolean religionAcepta;
+private List<String> actividadesAlternativas; 
 
     // checkboxes → boolean
     private boolean asistioEscuelaLenguaje;

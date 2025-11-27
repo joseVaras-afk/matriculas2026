@@ -38,6 +38,7 @@ public class FichaMatriculaDTO {
     private boolean chileSolidario;
     private boolean programaPuente;
     private boolean tieneFamiliarEnEscuela;
+    private String necesidadesEspeciales;
 
     // --- Retiro ---
     private String retiroNombre;

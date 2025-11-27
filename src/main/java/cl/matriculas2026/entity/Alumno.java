@@ -104,4 +104,6 @@ public class Alumno {
     @Column(name = "contactoEmergencia_alumno")
     private String contactoEmergencia;
 
+    @Column(name = "necesidadespecial_alumno")
+    private String necesidadespeciales;
 }

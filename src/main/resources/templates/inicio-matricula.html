@@ -33,11 +33,11 @@
     <span th:text="${mensaje}">Mensaje aquí</span>
   </div>
 
-  <form th:action="@{/inicio}" method="post" autocomplete="off" id="formRut">
+  <form th:action="@{/inicio}" method="post" autocomplete="off" id="formRut" >
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
-    <label for="rutAlumna">RUT de la alumna</label>
-    <input type="text" id="rutAlumna" class="rut-input" required>
+    <label for="rutAlumno">RUT de la alumna</label>
+    <input type="text" id="rutAlumno" class="rut-input" required name="rutAlumno"/>
 
     <div class="actions">
       <button type="submit" class="btn-primary">Continuar</button>

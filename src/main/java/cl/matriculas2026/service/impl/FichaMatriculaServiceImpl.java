@@ -116,7 +116,7 @@ public class FichaMatriculaServiceImpl implements FichaMatriculaService {
             ctx.put("padreOcupacion", dto.getOcupacionPadre());
 
             // otros boolean/texto
-            ctx.put("establecimientoProcedencia", dto.getEstablecimientoProcedencia());
+        /*     ctx.put("establecimientoProcedencia", dto.getEstablecimientoProcedencia());
         
             ctx.put("asistioLenguaje", siNo(dto.isAsistioEscuelaLenguaje()));
         
@@ -138,7 +138,7 @@ public class FichaMatriculaServiceImpl implements FichaMatriculaService {
 
             ctx.put("alumnoCesfam", dto.getCesfamAlumno());
 
-            ctx.put("enfermedad", dto.getEnfermedad());
+            ctx.put("enfermedad", dto.getEnfermedad()); */
 
             report.process(ctx, out);
             return out.toByteArray();
@@ -253,7 +253,7 @@ public class FichaMatriculaServiceImpl implements FichaMatriculaService {
         }
 
         // Otros
-        dto.setEstablecimientoProcedencia(m.getAlumno().getEstablecimientoProcedencia());
+        /* dto.setEstablecimientoProcedencia(m.getAlumno().getEstablecimientoProcedencia());
         dto.setAsistioEscuelaLenguaje(Boolean.TRUE.equals(m.getAlumno().getAsistioEscuelaLenguaje()));
         dto.setFono(Boolean.TRUE.equals(m.getAlumno().getFono()));
         dto.setPertenecePie(Boolean.TRUE.equals(m.getAlumno().getPertenecePie()));
@@ -263,7 +263,7 @@ public class FichaMatriculaServiceImpl implements FichaMatriculaService {
         dto.setChileSolidario(Boolean.TRUE.equals(m.getAlumno().getChileSolidario()));
         dto.setProgramaPuente(Boolean.TRUE.equals(m.getAlumno().getProgramaPuente()));
         dto.setTieneFamiliarEnEscuela(Boolean.TRUE.equals(m.getAlumno().getTieneFamiliar()));
-        dto.setCesfamAlumno(m.getAlumno().getCesfam());
+        dto.setCesfamAlumno(m.getAlumno().getCesfam()); */
         return dto;
     }
 
